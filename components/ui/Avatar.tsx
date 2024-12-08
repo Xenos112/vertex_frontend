@@ -1,5 +1,4 @@
 import cn from "@/utils/cn";
-import Image, { type ImageProps } from "next/image";
 import React from "react";
 export type AvatarProps = React.ComponentProps<"img"> & {
   name: string;
