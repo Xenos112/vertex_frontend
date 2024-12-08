@@ -8,11 +8,17 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
+      backgroundColor: {
         background: "var(--background)",
-        foreground: "var(--foreground)",
+      },
+      colors: {
+        primary: "var(--primary)",
+        "primary-hover": "var(--primary-hover)",
+        "primary-disabled": "var(--primary-disabled)",
+        "forground-disabled": "var(--forground-disabled)",
       },
     },
   },
+  darkMode: "class",
   plugins: [],
 } satisfies Config;
