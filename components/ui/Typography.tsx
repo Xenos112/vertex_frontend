@@ -23,7 +23,7 @@ const typographyVariants = cva(["text-black dark:text-white leading-0"], {
   },
 });
 
-type TypographyProps<T extends keyof JSX.IntrinsicElements> = {
+export type TypographyProps<T extends keyof JSX.IntrinsicElements> = {
   as: T;
   className?: string;
 } & ComponentProps<T> &
