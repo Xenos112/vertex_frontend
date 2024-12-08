@@ -16,6 +16,7 @@ export default {
         "primary-hover": "var(--primary-hover)",
         "primary-disabled": "var(--primary-disabled)",
         "forground-disabled": "var(--forground-disabled)",
+        grayish: "var(--grayish)",
       },
     },
   },

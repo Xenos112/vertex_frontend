@@ -8,9 +8,11 @@
   --primary-disabled: hsl(226, 100%, 63%, 70%);
   --forground-disabled: hsl(0, 0%, 100%, 55%);
   --background: #00030e;
+  --grayish: #a7a7a7;
 }
 
-[data-theme="dark"] {
-  background-color: var(--background);
-  color: white;
+@layer base {
+  body {
+    @apply dark:bg-background bg-white text-black dark:text-white;
+  }
 }
