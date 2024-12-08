@@ -10,7 +10,14 @@ export default function Avatar({ className, src, ...props }: AvatarProps) {
 
   if (!src) {
     return (
-      <span className={cn("size-[40px]", className)}>{displayedName}</span>
+      <span
+        className={cn(
+          "size-[40px] rounded-full flex items-center justify-center bg-blue-950 text-white",
+          className
+        )}
+      >
+        {displayedName}
+      </span>
     );
   }
   return (
