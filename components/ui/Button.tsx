@@ -3,9 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import React from "react";
 
 const buttonVariants = cva(
-  [
-    "rounded-[7px] duration-300 flex items-center justify-center gap-[10px] leading-0",
-  ],
+  ["rounded-[7px] duration-300 flex items-center justify-center gap-[10px] leading-0"],
   {
     variants: {
       variant: {
@@ -30,22 +28,12 @@ const buttonVariants = cva(
       variant: "primary",
       size: "md",
     },
-  }
+  },
 );
 
 type Variants = VariantProps<typeof buttonVariants>;
 export type ButtonProps = React.ComponentProps<"button"> & Variants;
 
-export default function Button({
-  variant,
-  size,
-  className,
-  ...props
-}: ButtonProps) {
-  return (
-    <button
-      {...props}
-      className={cn(buttonVariants({ variant, size, className }))}
-    />
-  );
+export default function Button({ variant, size, className, ...props }: ButtonProps) {
+  return <button {...props} className={cn(buttonVariants({ variant, size, className }))} />;
 }

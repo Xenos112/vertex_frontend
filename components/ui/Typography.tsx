@@ -7,9 +7,7 @@ const typographyVariants = cva(["text-black dark:text-white leading-0"], {
     variant: {
       body: ["leading-0 text-base font-regular"],
       title: ["text-[4rem] font-bold max-md:text-[3rem] max-sm:[2rem]"],
-      "sub-title": [
-        "text-grayish text-[1.5rem] max-md:text-[4.5rem] max-sm:text-base",
-      ],
+      "sub-title": ["text-grayish text-[1.5rem] max-md:text-[4.5rem] max-sm:text-base"],
       url: ["underline font-regular text-base"],
       tag: [
         "underline font-light text-primary dark:text-primary duration-300 hover:text-primary-hover",
@@ -37,10 +35,7 @@ export default function Typography<T extends keyof JSX.IntrinsicElements>({
 }: TypographyProps<T>) {
   return (
     // @ts-ignore
-    <Component
-      className={cn(typographyVariants({ variant, className }))}
-      {...props}
-    />
+    <Component className={cn(typographyVariants({ variant, className }))} {...props} />
   );
 }
 

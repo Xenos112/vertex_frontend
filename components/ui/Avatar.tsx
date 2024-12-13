@@ -11,8 +11,8 @@ export default function Avatar({ className, src, ...props }: AvatarProps) {
     return (
       <span
         className={cn(
-          "size-[40px] rounded-full flex items-center justify-center bg-blue-950 text-white",
-          className
+          "flex size-[40px] items-center justify-center rounded-full bg-blue-950 text-white",
+          className,
         )}
       >
         {displayedName}
