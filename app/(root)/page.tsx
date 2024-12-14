@@ -2,7 +2,7 @@ import React from "react";
 
 export default function page() {
   return (
-    <main className="h-[5555px]">
+    <main className="w-full">
       <div>Hello world</div>
     </main>
   );
