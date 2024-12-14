@@ -35,7 +35,7 @@ export default function Typography<T extends keyof JSX.IntrinsicElements>({
 }: TypographyProps<T>) {
   return (
     // @ts-ignore
-    <Component className={cn(typographyVariants({ variant, className }))} {...props} />
+    <Component {...props} className={cn(typographyVariants({ variant, className }))} />
   );
 }
 
