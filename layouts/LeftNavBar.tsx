@@ -41,7 +41,7 @@ export default function LeftNavBar() {
     <>
       <div
         ref={ref}
-        className={`sticky top-0 flex h-screen w-[250px] flex-col items-stretch justify-between overflow-hidden px-4 py-5 max-sm:fixed max-sm:w-[70vw] max-sm:bg-gray-200/80 max-sm:backdrop-blur max-sm:duration-500 max-sm:dark:bg-black/80 ${isMobileSideBarOpen ? "max-sm:translate-x-0" : "max-sm:-translate-x-full"}`}
+        className={`sticky top-0 flex h-screen w-[350px] flex-col items-stretch justify-between overflow-hidden px-16 py-5 max-lg:w-fit max-lg:px-5 max-sm:fixed max-sm:w-[70vw] max-sm:bg-gray-200/80 max-sm:backdrop-blur max-sm:duration-500 max-sm:dark:bg-black/80 ${isMobileSideBarOpen ? "max-sm:translate-x-0" : "max-sm:-translate-x-full"}`}
       >
         <div className="flex flex-col gap-8">
           <div>
