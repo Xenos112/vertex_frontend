@@ -42,7 +42,9 @@ function AvatarFallback({ children, className }: { children: ReactNode; classNam
   ) : null;
 }
 
-function AvatarImage({ ...props }: ComponentProps<"img">) {
+type AvatarImageProps = Omit<ComponentProps<"img">, "src"> & { src: string | null };
+
+function AvatarImage({ ...props }: AvatarImageProps) {
   const [loading, setLoading] = use(ImageLoadingContext);
   const [imageSrc, setImageSrc] = useState("");
 
