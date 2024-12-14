@@ -18,6 +18,7 @@ export default {
         "primary-disabled": "var(--primary-disabled)",
         "forground-disabled": "var(--forground-disabled)",
         grayish: "var(--grayish)",
+        'input-background': 'var(--input-background)'
       },
     },
   },

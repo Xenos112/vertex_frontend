@@ -18,8 +18,8 @@ const buttonVariants = cva(
         ],
       },
       size: {
-        md: ["px-5 py-[10px] rounded-full"],
-        sm: ["px-[10px] py-2 rounded-full"],
+        md: ["px-5 py-[10px]"],
+        sm: ["px-[10px] py-2"],
         "icon-md": ["p-3 rounded-full"],
         "icon-sm": ["p-2 rounded-full"],
       },

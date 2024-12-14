@@ -9,6 +9,7 @@
   --forground-disabled: hsl(0, 0%, 100%, 55%);
   --background: #00030e;
   --grayish: #a7a7a7;
+  --input-background: rgba(38, 88, 253, 0.03);
 }
 
 @layer base {
