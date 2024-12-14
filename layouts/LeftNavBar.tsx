@@ -3,7 +3,7 @@ import Button from "@/components/ui/Button";
 import cn from "@/utils/cn";
 import { Hash, Worm, Bell, Bookmark, User, Users, Search, Sun, Moon } from "lucide-react";
 import Link, { type LinkProps } from "next/link";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 import { useUserStore } from "@/store/user";
 import Typography from "@/components/ui/Typography";
@@ -35,11 +35,13 @@ export default function LeftNavBar() {
   const ref = useOnClickOutside<HTMLDivElement>(() => setIsMobileSideBarOpen(false));
   const { theme, setTheme } = useTheme();
 
+  useEffect(() => {}, [theme]);
+
   return (
     <>
       <div
         ref={ref}
-        className={`sticky top-0 flex h-screen w-[250px] flex-col items-stretch justify-between overflow-hidden px-4 py-5 max-sm:fixed max-sm:w-[70vw] max-sm:bg-black/80 max-sm:backdrop-blur max-sm:duration-500 ${isMobileSideBarOpen ? "max-sm:translate-x-0" : "max-sm:-translate-x-full"}`}
+        className={`sticky top-0 flex h-screen w-[250px] flex-col items-stretch justify-between overflow-hidden px-4 py-5 max-sm:fixed max-sm:w-[70vw] max-sm:bg-gray-200/80 max-sm:backdrop-blur max-sm:duration-500 max-sm:dark:bg-black/80 ${isMobileSideBarOpen ? "max-sm:translate-x-0" : "max-sm:-translate-x-full"}`}
       >
         <div className="flex flex-col gap-8">
           <div>
@@ -122,9 +124,9 @@ export default function LeftNavBar() {
         </div>
         <div className="sm:hidden">
           {theme === "dark" ? (
-            <Sun className="size-[32]" onClick={() => setTheme("light")} />
+            <Sun className="size-[32]" onClick={() => setTheme(() => "light")} />
           ) : (
-            <Moon className="size-[32]" onClick={() => setTheme("dark")} />
+            <Moon className="size-[32]" onClick={() => setTheme(() => "dark")} />
           )}
         </div>
       </div>

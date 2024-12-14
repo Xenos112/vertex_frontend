@@ -2,11 +2,7 @@
 import { useEffect, useState } from "react";
 import { ThemeProvider } from "next-themes";
 
-export default function ThemeProviderWrapper({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function ThemeProviderWrapper({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -17,5 +13,9 @@ export default function ThemeProviderWrapper({
     return <>{children}</>;
   }
 
-  return <ThemeProvider>{children}</ThemeProvider>;
+  return (
+    <ThemeProvider defaultTheme="system" attribute="class" enableSystem>
+      {children}
+    </ThemeProvider>
+  );
 }
