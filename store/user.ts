@@ -27,6 +27,7 @@ export const useUserStore = create<UserStore>((set) => ({
     try {
       const res = await vertex.get<{ data: User }>("http://localhost:8080/authenticated/me", {
         retry: 1,
+        timeout: 1000,
         credentials: "include",
       });
       if (!res.ok) {
