@@ -1,4 +1,5 @@
 import vertex from ".";
+// todo: re-implement this using the old api
 
 export type UserSuggestion = {
   ID: string;
