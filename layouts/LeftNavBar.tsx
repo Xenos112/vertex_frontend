@@ -150,7 +150,6 @@ export default function LeftNavBar() {
         </Button>
         <Worm className="size-[32]" />
       </div>
-      <img src={user?.image_url} alt="" />
     </>
   );
 }
