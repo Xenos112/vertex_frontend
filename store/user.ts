@@ -25,9 +25,9 @@ export const useUserStore = create<UserStore>((set) => ({
   setUser: (user: any) => set({ user }),
   fetchUser: async () => {
     try {
-      const res = await fetch("http://localhost:4000/me", {
-        // retry: 1,
-        // timeout: 1000,
+      const res = await vertex.get<{ data: User }>("http://localhost:4000/me", {
+        retry: 1,
+        timeout: 1000,
         credentials: "include",
       });
       if (!res.ok) {
