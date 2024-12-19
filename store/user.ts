@@ -2,12 +2,12 @@ import vertex from "@/api";
 import { create } from "zustand";
 
 export type User = {
-  user_id: string;
+  id: string;
   user_name: string;
   email: string;
   tag: string;
   bio: string;
-  profile_image: string | null;
+  image_url: string | null;
 };
 
 type UserStore = {
@@ -25,9 +25,9 @@ export const useUserStore = create<UserStore>((set) => ({
   setUser: (user: any) => set({ user }),
   fetchUser: async () => {
     try {
-      const res = await vertex.get<{ data: User }>("http://localhost:8080/authenticated/me", {
-        retry: 1,
-        timeout: 1000,
+      const res = await fetch("http://localhost:4000/me", {
+        // retry: 1,
+        // timeout: 1000,
         credentials: "include",
       });
       if (!res.ok) {

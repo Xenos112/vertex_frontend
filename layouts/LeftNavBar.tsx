@@ -51,7 +51,7 @@ export default function LeftNavBar() {
             <Link href={"/"} className="max-sm:block sm:hidden">
               {user ? (
                 <Avatar>
-                  <AvatarImage className="size-[50px]" src={user.profile_image} />
+                  <AvatarImage className="size-[50px]" src={user.image_url} />
                   <AvatarFallback>{user?.user_name}</AvatarFallback>
                 </Avatar>
               ) : (
@@ -97,10 +97,10 @@ export default function LeftNavBar() {
         </div>
 
         <div className="self-start max-sm:hidden">
-          {user?.user_id ? (
+          {user?.id ? (
             <div className="flex items-center justify-center gap-3">
               <Avatar>
-                <AvatarImage src={user.profile_image} />
+                <AvatarImage src={user.image_url} />
                 <AvatarFallback>{user?.user_name}</AvatarFallback>
               </Avatar>
 
@@ -139,7 +139,7 @@ export default function LeftNavBar() {
         >
           {user ? (
             <Avatar>
-              <AvatarImage src={user.profile_image} />
+              <AvatarImage src={user.image_url} />
               <AvatarFallback>{user?.user_name}</AvatarFallback>
             </Avatar>
           ) : (
@@ -150,6 +150,7 @@ export default function LeftNavBar() {
         </Button>
         <Worm className="size-[32]" />
       </div>
+      <img src={user?.image_url} alt="" />
     </>
   );
 }
