@@ -1,7 +1,6 @@
 import { ToasterContext } from "@/providers/ToasterProvider";
 import React, { type MouseEventHandler, ReactNode, use, ReactElement } from "react";
 import { X, Check, CircleX, Info } from "lucide-react";
-import cn from "@/utils/cn";
 
 const Toast = ({
   text,
@@ -25,7 +24,7 @@ const Toast = ({
         <X />
       </button>
       <div>{icon as ReactNode}</div>
-      <p className="flex-1 truncate max-w-[80%]">{text}</p>
+      <p className="max-w-[80%] flex-1 truncate">{text}</p>
       <span
         className="animate-fade-in absolute bottom-0 left-0 h-[3px] w-full content-['']"
         style={{
@@ -35,6 +34,29 @@ const Toast = ({
     </div>
   );
 };
+
+/**
+ * Hook to open a toaster with a message
+ *
+ *
+ * @example
+ * import { useToaster } from "@/hooks/useToaster";
+ *
+ * function MyComponent() {
+ *   const toaster = useToaster();
+ *
+ *   return (
+ *     <div>
+ *       <button onClick={() => toaster.open({ text: "Hello World" })}>
+ *         Open Toaster
+ *       </button>
+ *     </div>
+ *   );
+ * }
+ *
+ * @param {{ text: string; icon?: ReactElement; delay?: number }} param0
+ * @returns {void}
+ */
 
 export default function useToaster() {
   const [, setToasts] = use(ToasterContext);
