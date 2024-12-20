@@ -1,6 +1,3 @@
-
 export default function Stats() {
-  return (
-    <div className="w-fit mx-auto flex">Stats</div>
-  )
+  return <div className="mx-auto flex w-fit">Stats</div>;
 }
