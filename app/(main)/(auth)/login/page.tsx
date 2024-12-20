@@ -4,29 +4,45 @@ import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
-import { FormEvent, useState } from "react";
+import { type FormEvent, useState } from "react";
 import { useUserStore } from "@/store/user";
 import { redirect } from "next/navigation";
+import useToaster from "@/hooks/useToaster";
 
 export default function page() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const fetchUser = useUserStore((state) => state.fetchUser);
+  const toaster = useToaster();
 
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     if (!email || !password) {
       setLoading(false);
+      toaster.error({ text: "please enter email and password" });
       return;
     }
 
     const data = await login(email, password);
+    if ("error" in data) {
+      toaster.error({ text: data.error as string });
+      setLoading(false);
+      return;
+    }
+    if ((data as string[]).at(0)) {
+      (data as string[]).forEach((error) => {
+        toaster.error({ text: error });
+      });
+      setLoading(false);
+      return;
+    }
 
-    if (data?.token) {
+    if ("token" in data) {
       localStorage.setItem("auth_token", data.token);
       await fetchUser();
+      toaster.success({ text: "Login Successfull" });
       redirect("/");
     }
 
@@ -62,18 +78,18 @@ export default function page() {
           <span className="text-[36px] font-bold max-md:hidden">/</span>
 
           <div className="flex flex-col gap-[20px] font-semibold max-md:flex-row">
-            <Button variant="outline" className="max-md:p-4">
+            <Button variant="outline" className="w-full max-md:p-4">
               <img src="/google.svg" width={24} />
               <span className="max-md:hidden">Sign In Using Google</span>
             </Button>
             <Link href="http://localhost:4000/auth/discord">
-              <Button variant="outline" className="max-md:p-4">
+              <Button variant="outline" className="w-full max-md:p-4">
                 <img src="/discord.svg" width={24} />
                 <span className="max-md:hidden">Sign In Using Discord</span>
               </Button>
             </Link>
             <Link href="http://localhost:4000/auth/github">
-              <Button variant="outline" className="max-md:p-4">
+              <Button variant="outline" className="w-full max-md:p-4">
                 <img src="/github.svg" width={24} />
                 <span className="max-md:hidden">Sign In Using Github</span>
               </Button>
