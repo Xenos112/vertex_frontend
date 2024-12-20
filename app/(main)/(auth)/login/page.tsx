@@ -8,19 +8,18 @@ import { type FormEvent, useState } from "react";
 import { useUserStore } from "@/store/user";
 import { redirect } from "next/navigation";
 import useToaster from "@/hooks/useToaster";
+import useAction from "@/hooks/useAction";
 
 export default function page() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
   const fetchUser = useUserStore((state) => state.fetchUser);
   const toaster = useToaster();
+  const [run, loading] = useAction(submit);
 
-  const submit = async (e: FormEvent<HTMLFormElement>) => {
+  async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setLoading(true);
     if (!email || !password) {
-      setLoading(false);
       toaster.error({ text: "please enter email and password" });
       return;
     }
@@ -28,14 +27,13 @@ export default function page() {
     const data = await login(email, password);
     if ("error" in data) {
       toaster.error({ text: data.error as string });
-      setLoading(false);
       return;
     }
+    
     if ((data as string[]).at(0)) {
       (data as string[]).forEach((error) => {
         toaster.error({ text: error });
       });
-      setLoading(false);
       return;
     }
 
@@ -45,9 +43,7 @@ export default function page() {
       toaster.success({ text: "Login Successfull" });
       redirect("/");
     }
-
-    setLoading(false);
-  };
+  }
 
   return (
     <div className="flex h-[calc(100dvh-80px)] items-center justify-center">
@@ -57,7 +53,7 @@ export default function page() {
         </h1>
 
         <div className="flex w-full items-center justify-between max-md:flex-col max-md:gap-[30px]">
-          <form onSubmit={submit} className="flex flex-col gap-[30px]">
+          <form onSubmit={run} className="flex flex-col gap-[30px]">
             <div className="flex flex-col gap-[10px]">
               <Input
                 value={email}
