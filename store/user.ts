@@ -25,6 +25,13 @@ export const useUserStore = create<UserStore>((set) => ({
   setUser: (user: any) => set({ user }),
   fetchUser: async () => {
     try {
+      if (window.localStorage) {
+        const authToken = window.localStorage.getItem("auth_token");
+        if (!authToken) {
+          set({ loading: false });
+          return;
+        }
+      }
       const res = await vertex.get<{ data: User }>("http://localhost:4000/me", {
         retry: 1,
         timeout: 1000,
