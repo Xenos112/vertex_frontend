@@ -6,9 +6,24 @@ export default {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./layouts/**/*.{js,ts,jsx,tsx,mdx}",
+    "./providers/**/*.{js,ts,jsx,tsx,mdx}",
+    "./hooks/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
+      animation: {
+        "fade-in": "fade-in 3s ease-in-out",
+      },
+      keyframes: {
+        "fade-in": {
+          "0%": {
+            width: "100%",
+          },
+          "100%": {
+            width: "0%",
+          },
+        },
+      },
       backgroundColor: {
         background: "var(--background)",
       },
@@ -18,7 +33,7 @@ export default {
         "primary-disabled": "var(--primary-disabled)",
         "forground-disabled": "var(--forground-disabled)",
         grayish: "var(--grayish)",
-        'input-background': 'var(--input-background)'
+        "input-background": "var(--input-background)",
       },
     },
   },

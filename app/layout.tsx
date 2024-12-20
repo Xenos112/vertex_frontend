@@ -3,7 +3,7 @@ import "./globals.css";
 import { inter } from "@/fonts";
 import GlobalProvider from "@/providers/GlobalProvider";
 import { UserContext } from "@/providers/UserContext";
-import { Toaster } from "react-hot-toast";
+import ToasterProvider from "@/providers/ToasterProvider";
 
 export const metadata: Metadata = {
   title: "Vertex Frontend",
@@ -15,8 +15,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en" className="dark">
       <GlobalProvider>
         <body className={`${inter.className} antialiased`}>
-          <UserContext>{children}</UserContext>
-          <Toaster />
+          <ToasterProvider>
+            <UserContext>{children}</UserContext>
+          </ToasterProvider>
         </body>
       </GlobalProvider>
     </html>
