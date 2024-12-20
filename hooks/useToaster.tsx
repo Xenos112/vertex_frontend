@@ -25,7 +25,7 @@ const Toast = ({
         <X />
       </button>
       <div>{icon as ReactNode}</div>
-      <p>{text}</p>
+      <p className="flex-1 truncate max-w-[80%]">{text}</p>
       <span
         className="animate-fade-in absolute bottom-0 left-0 h-[3px] w-full content-['']"
         style={{

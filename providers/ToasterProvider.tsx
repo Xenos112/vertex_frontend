@@ -16,7 +16,7 @@ export default function ToasterProvider({ children }: { children: ReactNode }) {
 
   return (
     <ToasterContext value={[toasts, setToasts]}>
-      <div className="fixed right-3 top-3 z-50 min-w-80">
+      <div className="fixed right-3 top-3 z-50 min-w-96">
         <div className="flex flex-col gap-4">
           {toasts.map((toast) => (
             <div key={toast.id}>{toast.Components}</div>
