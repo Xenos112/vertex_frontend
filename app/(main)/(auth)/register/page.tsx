@@ -13,6 +13,7 @@ import useAction from "@/hooks/useAction";
 export default function page() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [UserName, setUserName] = useState("");
   const fetchUser = useUserStore((state) => state.fetchUser);
   const toaster = useToaster();
   const [run, loading] = useAction(submit);
@@ -49,12 +50,18 @@ export default function page() {
     <div className="flex h-[calc(100dvh-80px)] items-center justify-center">
       <div className="flex w-full max-w-[800px] flex-col items-center justify-center gap-[90px]">
         <h1 className="max-w-[500px] text-center text-[28px] font-semibold max-md:mx-[50px] max-md:text-[20px]">
-          Login Into Your Account and Make Progress and new Friends
+          Register in a New Account and Share Knowledge
         </h1>
 
         <div className="flex w-full items-center justify-between max-md:flex-col max-md:gap-[30px]">
           <form onSubmit={run} className="flex flex-col gap-[30px]">
             <div className="flex flex-col gap-[10px]">
+              <Input
+                value={UserName}
+                onChange={(e) => setUserName(e.target.value)}
+                placeholder="User name"
+                className="rounded-lg border border-primary"
+              />
               <Input
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -93,12 +100,8 @@ export default function page() {
           </div>
         </div>
         <div className="flex gap-[32px] max-md:flex-col max-md:items-center max-md:gap-4">
-          <Link href="#" className="text-primary underline">
-            Forget Your Password?
-          </Link>
-          <span className="max-md:hidden">/</span>
-          <Link href="/register" className="text-primary underline">
-            Do Not Have Account Yet?
+          <Link href="/login" className="text-primary underline">
+            have an existing account?
           </Link>
         </div>
       </div>
