@@ -2,6 +2,11 @@ import { ToasterContext } from "@/providers/ToasterProvider";
 import React, { type MouseEventHandler, ReactNode, use, ReactElement } from "react";
 import { X, Check, CircleX, Info } from "lucide-react";
 
+
+type ToastProps = {
+  delay?: number;
+}
+
 const Toast = ({
   text,
   close,
@@ -47,14 +52,14 @@ const Toast = ({
  *
  *   return (
  *     <div>
- *       <button onClick={() => toaster.open({ text: "Hello World" })}>
+ *       <button onClick={() => toaster.open("Hello World")}>
  *         Open Toaster
  *       </button>
  *     </div>
  *   );
  * }
  *
- * @param {{ text: string; icon?: ReactElement; delay?: number }} param0
+ * @param {text:string, { icon?: ReactElement; delay?: number }} param0
  * @returns {void}
  */
 
@@ -62,71 +67,71 @@ export default function useToaster() {
   const [, setToasts] = use(ToasterContext);
   use(ToasterContext);
 
-  const open = ({ text, icon, delay }: { text: string; icon?: ReactElement; delay?: number }) => {
+  const open = (text: string, opts?: ToastProps & { icon: ReactElement }) => {
     const id = Date.now().toString();
     const toast = (
       <Toast
         close={() => close(id)}
-        delay={delay}
+        delay={opts?.delay}
         text={text}
-        icon={icon ?? <Check color="green" />}
+        icon={opts?.icon ?? <Check color="green" />}
       />
     );
 
     setToasts((prev) => [{ id, Components: toast }, ...prev]);
-    setTimeout(() => close(id), delay ?? 3000);
+    setTimeout(() => close(id), opts?.delay ?? 3000);
   };
 
   const close = (id: string) => {
     setToasts((prev) => prev.filter((toast) => toast.id !== id));
   };
 
-  const error = ({ text, delay }: { text: string; delay?: number }) => {
+  const error = (text: string, opts?: ToastProps) => {
     const id = Date.now().toString();
     const toast = (
       <Toast
         close={() => close(id)}
         text={text}
-        delay={delay}
+        delay={opts?.delay}
         background="red"
         icon={<CircleX color="red" />}
       />
     );
 
     setToasts((prev) => [{ id, Components: toast }, ...prev]);
-    setTimeout(() => close(id), delay ?? 3000);
+    setTimeout(() => close(id), opts?.delay ?? 3000);
   };
 
-  const success = ({ text, delay }: { text: string; delay?: number }) => {
+  const success = (text: string, opts?: ToastProps) => {
     const id = Date.now().toString();
     const toast = (
       <Toast
         close={() => close(id)}
         text={text}
-        delay={delay}
+        delay={opts?.delay}
         background="green"
         icon={<Check color="green" />}
       />
     );
 
     setToasts((prev) => [{ id, Components: toast }, ...prev]);
-    setTimeout(() => close(id), delay ?? 3000);
+    setTimeout(() => close(id), opts?.delay ?? 3000);
   };
 
-  const info = ({ text, delay }: { text: string; delay?: number }) => {
+  const info = (text: string, opts?: ToastProps) => {
     const id = Date.now().toString();
     const toast = (
       <Toast
         close={() => close(id)}
         text={text}
-        delay={delay}
+        delay={opts?.delay}
         background="blue"
         icon={<Info color="blue" />}
       />
     );
 
     setToasts((prev) => [{ id, Components: toast }, ...prev]);
-    setTimeout(() => close(id), delay ?? 3000);
+    setTimeout(() => close(id), opts?.delay ?? 3000);
   };
 
   return { open, error, success, info };

@@ -20,19 +20,19 @@ export default function page() {
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!email || !password) {
-      toaster.error({ text: "please enter email and password" });
+      toaster.error("please enter email and password")
       return;
     }
 
     const data = await login(email, password);
     if ("error" in data) {
-      toaster.error({ text: data.error as string });
+      toaster.error(data.error as string)
       return;
     }
 
     if ((data as string[]).at(0)) {
       (data as string[]).forEach((error) => {
-        toaster.error({ text: error });
+        toaster.error(error as string)
       });
       return;
     }
@@ -40,7 +40,7 @@ export default function page() {
     if ("token" in data) {
       localStorage.setItem("auth_token", data.token);
       await fetchUser();
-      toaster.success({ text: "Login Successfull" });
+      toaster.success("Login Successfull")
       redirect("/");
     }
   }
