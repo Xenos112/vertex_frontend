@@ -16,7 +16,7 @@ const Toast = ({
   icon: ReactElement;
 }) => {
   return (
-    <div className="relative flex gap-4 rounded-xl bg-white p-4 dark:bg-background">
+    <div className="relative flex gap-4 rounded-xl bg-white p-4 dark:bg-background animate-appear">
       <button
         className="absolute right-4 top-4"
         onClick={close as MouseEventHandler<HTMLButtonElement>}

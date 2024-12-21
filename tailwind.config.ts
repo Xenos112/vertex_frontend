@@ -13,6 +13,8 @@ export default {
     extend: {
       animation: {
         "fade-in": "fade-in 3s ease-in-out",
+        appear: "appear 2999ms",
+        "fade-out": "fade-out 300ms ease-in-out",
       },
       keyframes: {
         "fade-in": {
@@ -22,6 +24,20 @@ export default {
           "100%": {
             width: "0%",
           },
+        },
+        appear: {
+          "0%": {
+            left: '100%'
+          },
+          "30%": {
+            left: '0%'
+          },
+          "80%": {
+            left: "0%"
+          },
+          "100%": {
+            left: "100%"
+          }
         },
       },
       backgroundColor: {
