@@ -1,5 +1,4 @@
 "use client";
-import { login } from "@/api/auth/login";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import { Loader2 } from "lucide-react";
@@ -9,23 +8,24 @@ import { useUserStore } from "@/store/user";
 import { redirect } from "next/navigation";
 import useToaster from "@/hooks/useToaster";
 import useAction from "@/hooks/useAction";
+import register from "@/api/auth/register"
 
 export default function page() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [UserName, setUserName] = useState("");
+  const [userName, setUserName] = useState("");
   const fetchUser = useUserStore((state) => state.fetchUser);
   const toaster = useToaster();
   const [run, loading] = useAction(submit);
 
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!email || !password) {
-      toaster.error({ text: "please enter email and password" });
+    if (!email || !password || !userName) {
+      toaster.error({ text: "please enter email and password and username" });
       return;
     }
 
-    const data = await login(email, password);
+    const data = await register(userName, email, password);
     if ("error" in data) {
       toaster.error({ text: data.error as string });
       return;
@@ -57,7 +57,7 @@ export default function page() {
           <form onSubmit={run} className="flex flex-col gap-[30px]">
             <div className="flex flex-col gap-[10px]">
               <Input
-                value={UserName}
+                value={userName}
                 onChange={(e) => setUserName(e.target.value)}
                 placeholder="User name"
                 className="rounded-lg border border-primary"

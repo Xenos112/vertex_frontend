@@ -18,7 +18,7 @@ export type APIResponse =
   }
   | string[];
 
-export async function login(userName: string, email: string, password: string) {
+export default async function register(userName: string, email: string, password: string) {
   const res = await vertex.post<APIResponse>("http://localhost:4000/auth/register", {
     json: { email, password, user_name: userName },
     credentials: "include",
