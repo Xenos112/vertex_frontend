@@ -13,7 +13,7 @@ export default {
     extend: {
       animation: {
         "fade-in": "fade-in 3s ease-in-out",
-        appear: "appear 2999ms",
+        appear: "appear 3010ms",
         "fade-out": "fade-out 300ms ease-in-out",
       },
       keyframes: {
