@@ -93,7 +93,7 @@ export default function page() {
           </div>
         </div>
         <div className="flex gap-[32px] max-md:flex-col max-md:items-center max-md:gap-4">
-          <Link href="#" className="text-primary underline">
+          <Link href="/register" className="text-primary underline">
             Forget Your Password?
           </Link>
           <span className="max-md:hidden">/</span>
