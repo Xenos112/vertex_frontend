@@ -35,8 +35,6 @@ export default function LeftNavBar() {
   const ref = useOnClickOutside<HTMLDivElement>(() => setIsMobileSideBarOpen(false));
   const { theme, setTheme } = useTheme();
 
-  useEffect(() => {}, [theme]);
-
   return (
     <>
       <div
