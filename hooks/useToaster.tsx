@@ -137,4 +137,4 @@ export default function useToaster() {
   return { open, error, success, info };
 }
 
-// todo: make it responsive
+// TODO: make it responsive

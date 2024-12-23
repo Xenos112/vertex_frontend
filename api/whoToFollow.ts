@@ -1,5 +1,5 @@
 import vertex from ".";
-// todo: re-implement this using the old api
+// TODO: re-implement this using the old api
 
 export type UserSuggestion = {
   ID: string;
@@ -22,6 +22,6 @@ export default async function whoToFollow() {
 
     return usersToFollow;
   } catch (error) {
-    // todo: handle Errors
+    // TODO: handle Errors
   }
 }

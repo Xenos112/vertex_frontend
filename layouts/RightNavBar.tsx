@@ -65,7 +65,7 @@ const SearchField = () => {
 function WhoToFollowSection() {
   const { loading, usersToFollow } = useUserSuggestions();
 
-  // todo: continues the avatar styles
+  // TODO: continues the avatar styles
   return (
     <div className="rounded-xl bg-white/[8%] p-4">
       <h1 className="text-xl font-medium">Who To Follow</h1>

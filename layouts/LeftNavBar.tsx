@@ -154,5 +154,5 @@ export default function LeftNavBar() {
   );
 }
 
-// todo: add a link to go to the profile page
-// fix: theme is not switching
+// TODO: add a link to go to the profile page
+// FIX: theme is not switching

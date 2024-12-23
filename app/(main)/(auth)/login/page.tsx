@@ -106,6 +106,6 @@ export default function page() {
   );
 }
 
-// todo: add links to other auth pages
-// todo: handle errors
-// todo: add google oauth
+// TODO: add links to other auth pages
+// TODO: handle errors
+// TODO: add google oauth

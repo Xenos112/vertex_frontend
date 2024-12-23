@@ -39,4 +39,4 @@ export default function Typography<T extends keyof JSX.IntrinsicElements>({
   );
 }
 
-// todo: open for some work (nothing yet)
+// TODO: open for some work (nothing yet)
