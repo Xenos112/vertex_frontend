@@ -18,7 +18,7 @@ type UserStore = {
   fetchUser: () => Promise<void>;
 };
 
-export const useUserStore = create<UserStore>((set) => ({
+export const useUserStore = create<UserStore>()((set) => ({
   user: null,
   error: "",
   loading: true,
