@@ -93,7 +93,7 @@ function WhoToFollowSection() {
 
 export default function RightNavBar() {
   return (
-    <aside className="sticky top-0 flex h-screen w-[350px] flex-col gap-4 px-8 py-5 max-lg:hidden max-lg:px-5">
+    <aside className="sticky flex-1 top-0 flex h-screen w-[350px] flex-col gap-4 px-8 py-5 max-lg:hidden max-lg:px-5">
       <SearchField />
       <div className="rounded-xl bg-white/[8%] p-4">
         <div>
