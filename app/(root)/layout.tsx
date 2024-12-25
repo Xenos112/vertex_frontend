@@ -4,8 +4,7 @@ import { type ReactNode } from "react";
 
 export default function layout({ children }: { children: ReactNode }) {
   return (
-    <div className="container mx-auto flex min-h-screen max-w-[1300px] max-sm:flex-col">
-      <div className="w-[350px] max-lg:w-fit max-sm:w-full">
+    <div className="container mx-auto grid min-h-screen grid-cols-[25%_1fr_25%] max-lg:grid-cols-[auto_1fr] max-sm:grid-cols-1 max-sm:grid-rows-[auto_1fr] max-sm:flex-col">
         <LeftNavBar />
       </div>
       {children}
