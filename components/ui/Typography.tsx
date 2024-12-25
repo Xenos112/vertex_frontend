@@ -5,10 +5,10 @@ import React, { ComponentProps, JSX } from "react";
 const typographyVariants = cva(["text-black dark:text-white leading-0"], {
   variants: {
     variant: {
-      body: ["leading-0 text-base font-regular"],
-      title: ["text-[4rem] font-bold max-md:text-[3rem] max-sm:[2rem]"],
-      "sub-title": ["text-grayish text-[1.5rem] max-md:text-[4.5rem] max-sm:text-base"],
-      url: ["underline font-regular text-base"],
+      body: ["leading-none text-base"],
+      title: ["text-[3.125rem] font-bold max-md:text-[3rem] max-sm:text-[2rem]"],
+      "sub-title": ["text-grayish text-[1.5rem] max-md:text-[1.25rem] max-sm:text-base"],
+      url: ["underline text-base"],
       tag: [
         "underline font-light text-primary dark:text-primary duration-300 hover:text-primary-hover",
       ],
