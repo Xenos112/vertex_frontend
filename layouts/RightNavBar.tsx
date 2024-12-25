@@ -9,6 +9,7 @@ import { Loader2, Search } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import Form from "next/form";
 
 const useUserSuggestions = () => {
   const [usersToFollow, setUsersToFollow] = useState<UserSuggestion[] | undefined>();
@@ -38,15 +39,9 @@ const SearchField = () => {
   const [search, setSearch] = useState("");
   const router = useRouter();
 
-  const handleClick = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const searchQuery = encodeURIComponent(search.trim());
-    router.push(`/search?q=${searchQuery}`);
-  };
-
   return (
-    <form
-      onSubmit={handleClick}
+    <Form
+      action={`/search?q=${search.trim()}`}
       className="flex w-full items-center gap-2 rounded-xl bg-input-background px-4"
     >
       <button type="submit">
@@ -58,7 +53,7 @@ const SearchField = () => {
         placeholder="Search..."
         onChange={(e) => setSearch(e.target.value)}
       />
-    </form>
+    </Form>
   );
 };
 
