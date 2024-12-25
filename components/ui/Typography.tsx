@@ -2,7 +2,7 @@ import cn from "@/utils/cn";
 import { cva, type VariantProps } from "class-variance-authority";
 import React, { ComponentProps, JSX } from "react";
 
-const typographyVariants = cva(["text-black dark:text-white leading-0"], {
+const typographyVariants = cva(["dark:text-white leading-0"], {
   variants: {
     variant: {
       body: ["leading-none text-base"],
