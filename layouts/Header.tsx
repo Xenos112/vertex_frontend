@@ -6,6 +6,7 @@ import { Link, Menu, UserRound, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useUserStore } from "@/store/user";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
+import ThemeToggle from "@/components/shared/ThemeToggle";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -38,6 +39,9 @@ export default function Header() {
           <Typography variant="body" as="li">
             <span onClick={() => navigate("/faq")}>F&Q</span>
           </Typography>
+          <span className="max-md:hidden">
+            <ThemeToggle />
+          </span>
           <button onClick={() => setOpen(false)} className="absolute right-4 top-4 md:hidden">
             <X size={30} />
           </button>
