@@ -164,7 +164,7 @@ export function Author() {
   return (
     <div className="flex items-center gap-3">
       <Avatar>
-        <AvatarImage src={post.author?.profile_picture_url} />
+        <AvatarImage src={post.author?.avatar.url} />
         <AvatarFallback>{post.author?.user_name}</AvatarFallback>
       </Avatar>
       <div>

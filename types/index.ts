@@ -14,6 +14,12 @@ export type Post = {
     id: string,
     user_name: string,
     profile_id: string | null;
-    profile_picture_url: string | null
+    avatar:{
+      id: string
+      url :string;
+      type: string,
+      target_id:string,
+      created_at:Date;
+    }
   }
 }
