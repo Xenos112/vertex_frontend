@@ -11,6 +11,11 @@ export default {
   ],
   theme: {
     extend: {
+      container:{
+        screens:{
+          lg: "1200px"
+        }
+      },
       animation: {
         "fade-in": "fade-in 3s ease-in-out",
         appear: "appear 3010ms",
