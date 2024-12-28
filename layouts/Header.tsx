@@ -20,23 +20,23 @@ export default function Header() {
 
   return (
     <div className="z-[1000] flex h-[80px] items-center justify-between">
-      <Typography as="h1" variant="logo">
+      <Typography as="h1" variant="logo" className="cursor-pointer">
         Logo
       </Typography>
       <div
         className={`z-50 flex items-center gap-[30px] duration-300 max-md:fixed max-md:inset-0 max-md:h-dvh max-md:w-dvw max-md:flex-col max-md:items-center max-md:justify-center max-md:bg-white/40 max-md:backdrop-blur ${open ? "max-md:translate-x-0" : "max-md:translate-x-full"}`}
       >
         <ul className="flex gap-[27px] *:font-semibold max-md:flex-col max-md:gap-[50px] max-md:text-center max-md:*:text-[32px]">
-          <Typography variant="body" as="li">
+          <Typography variant="body" as="li" className="cursor-pointer">
             <span onClick={() => navigate("/")}>Home</span>
           </Typography>
-          <Typography variant="body" as="li">
+          <Typography variant="body" as="li" className="cursor-pointer">
             <span onClick={() => navigate("/about")}>About</span>
           </Typography>
-          <Typography variant="body" as="li">
+          <Typography variant="body" as="li" className="cursor-pointer">
             <span onClick={() => navigate("/premium")}>Pricing</span>
           </Typography>
-          <Typography variant="body" as="li">
+          <Typography variant="body" as="li" className="cursor-pointer">
             <span onClick={() => navigate("/faq")}>F&Q</span>
           </Typography>
           <span className="max-md:hidden">
