@@ -52,7 +52,7 @@ export function Pricing({
     <PricingContext value={data}>
       <div
         className={cn(
-          "relative flex h-[70dvh] flex-1 flex-col gap-8 rounded-lg border-4 border-primary p-4",
+          "relative flex h-[70dvh] flex-1 flex-col gap-8 rounded-lg border-2 border-primary p-4 shadow-xl shadow-blue-500/20",
           className,
         )}
       >
