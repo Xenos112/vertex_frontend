@@ -76,14 +76,14 @@ export default function LeftNavBar() {
 
     const res = await uploadMedias(formData);
     if (res.urls.length > 0) {
-      setUrls(res.urls!);
+      setUrls(res.urls);
       toast.success("files uploaded successfully");
     }
   };
 
   useAfterMount(() => {
     uploadFiles();
-  }, [files]);
+  }, [files?.[0].name]);
 
   return (
     <>

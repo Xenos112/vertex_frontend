@@ -9,8 +9,5 @@ export default function useAfterMount(callback: () => void, deps: any[] = []) {
     } else {
       hasMounted.current = true;
     }
-    return () => {
-      hasMounted.current = true;
-    };
   }, deps);
 }
