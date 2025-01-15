@@ -48,7 +48,7 @@ type AvatarImageProps = Omit<ComponentProps<"img">, "src"> & { src: string | nul
 function AvatarImage({ ...props }: AvatarImageProps) {
   const [loading, setLoading] = use(ImageLoadingContext);
   const [imageSrc, setImageSrc] = useState("");
-  const toaster = useToaster()
+  const toaster = useToaster();
 
   useEffect(() => {
     const fetchImage = async () => {
@@ -57,7 +57,7 @@ function AvatarImage({ ...props }: AvatarImageProps) {
         if (!props.src) return;
         const res = await vertex.get<Blob>(props.src as string);
         if (!res.ok) {
-          toaster.error('failed to fetch image')
+          toaster.error("failed to fetch image");
         }
 
         const imageBlob = await res.blob();
@@ -65,9 +65,9 @@ function AvatarImage({ ...props }: AvatarImageProps) {
         const imageUrl = URL.createObjectURL(imageBlob);
         setImageSrc(imageUrl);
       } catch (error) {
-        toaster.error('something went wrong when fetching image')
+        toaster.error("something went wrong when fetching image");
       } finally {
-        if(!props.src) setLoading(true)
+        if (!props.src) setLoading(true);
         else setLoading(false);
       }
     };
