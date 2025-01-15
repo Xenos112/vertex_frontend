@@ -37,12 +37,11 @@ const useUserSuggestions = () => {
 
 const SearchField = () => {
   const [search, setSearch] = useState("");
-  const router = useRouter();
 
   return (
     <Form
       action={`/search?q=${search.trim()}`}
-      className="flex w-full items-center gap-2 rounded-xl bg-input-background px-4"
+      className="z-0 flex w-full items-center gap-2 rounded-xl bg-input-background px-4"
     >
       <button type="submit">
         <Search className="size-[24px]" />
@@ -60,7 +59,6 @@ const SearchField = () => {
 function WhoToFollowSection() {
   const { loading, usersToFollow } = useUserSuggestions();
 
-  // TODO: continues the avatar styles
   return (
     <div className="rounded-xl bg-white/[8%] p-4">
       <h1 className="text-xl font-medium">Who To Follow</h1>
@@ -88,7 +86,7 @@ function WhoToFollowSection() {
 
 export default function RightNavBar() {
   return (
-    <aside className="sticky top-0 flex h-screen flex-1 flex-col gap-4 px-8 py-5 max-lg:hidden max-lg:px-5">
+    <aside className="sticky top-0 z-[-1] flex h-screen flex-1 flex-col gap-4 px-8 py-5 max-lg:hidden max-lg:px-5">
       <SearchField />
       <div className="rounded-xl bg-white/[8%] p-4">
         <div>

@@ -3,7 +3,7 @@ import Button from "@/components/ui/Button";
 import cn from "@/utils/cn";
 import { Hash, Worm, Bell, Bookmark, User, Users, Search, Sun, Moon, X } from "lucide-react";
 import Link, { type LinkProps } from "next/link";
-import { ReactNode, useRef, useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 import { useUserStore } from "@/store/user";
 import Typography from "@/components/ui/Typography";
@@ -16,9 +16,13 @@ import {
   ModalContent,
   ToggleButton,
 } from "@/components/ui/Modal";
-
-// my import
 import Input from "@/components/ui/Input";
+import uploadMedias from "@/api/posts/upload-medias";
+import createPost from "@/api/posts/create-post";
+import useToaster from "@/hooks/useToaster";
+import { redirect } from "next/navigation";
+import useAfterMount from "@/hooks/useAfterMount";
+
 
 function NavItem({
   href,
@@ -44,9 +48,43 @@ export default function LeftNavBar() {
   const [isMobileSideBarOpen, setIsMobileSideBarOpen] = useState(false);
   const ref = useOnClickOutside(() => setIsMobileSideBarOpen(false));
   const { theme, setTheme } = useTheme();
-
-  // my changes
   const fileInput = useRef(null);
+  const [files, setFiles] = useState<FileList | null>(null);
+  const [urls, setUrls] = useState<string[] | null>();
+  const [postContent, setPostContent] = useState<string>("");
+  const toast = useToaster();
+
+  const createNewPost = async () => {
+    if (!user) {
+      toast.error("You must be logged in to create a post");
+      redirect("/login");
+    }
+    toast.success("test");
+    const res = await createPost({ content: postContent, medias: urls! });
+    if (res.data.id) {
+      toast.success("Post created successfully");
+    }
+  };
+
+  const uploadFiles = async () => {
+    const formData = new FormData();
+
+    if (files) {
+      for (const file of files) {
+        formData.append("file", file);
+      }
+    }
+
+    const res = await uploadMedias(formData);
+    if (res.urls.length > 0) {
+      setUrls(res.urls!);
+      toast.success("files uploaded successfully");
+    }
+  };
+
+  useAfterMount(() => {
+    uploadFiles();
+  }, [files]);
 
   return (
     <>
@@ -106,20 +144,22 @@ export default function LeftNavBar() {
                 <Button className="w-full rounded-full">Post</Button>
               </ToggleButton>
               <ModalContent className="bg-blue-300">
-                {/* Modal */}
-                <ModalBody>
-                  <div className="flex min-h-[230px] flex-col rounded-lg bg-black p-[24px]">
-                    <input type="file" name="" id="" ref={fileInput as any} className="hidden" />
-                    <ModalCloseButton>
-                      <X
-                        size={30}
-                        color="white"
-                        strokeWidth={1.5}
-                        className="mb-2 ml-auto cursor-pointer font-bold"
-                      />
+                <ModalBody className="min-w-[600px]">
+                  <div className="flex min-h-[300px] flex-col rounded-lg bg-black p-[24px]">
+                    <input
+                      type="file"
+                      name="file"
+                      multiple
+                      accept="image/*, video/*"
+                      ref={fileInput}
+                      className="hidden"
+                      onChange={(e) => setFiles(e.target.files)}
+                    />
+                    <ModalCloseButton className="ml-auto">
+                      <X size={24} color="white" className="mb-[24px] ml-auto cursor-pointer" />
                     </ModalCloseButton>
                     {/*  form  */}
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between gap-3">
                       {user ? (
                         <Avatar>
                           <AvatarImage className="size-[50px]" src={user.image_url} />
@@ -131,21 +171,24 @@ export default function LeftNavBar() {
                       <Input
                         placeholder="Share Your Thoughts..."
                         type="text"
-                        name="text"
-                        className="mx-2 bg-transparent"
+                        name="content"
+                        onChange={(e) => setPostContent(e.target.value)}
+                        className="mx-2 bg-transparent text-white"
                       />
                       <Button
-                        className=""
+                        className="text-sm"
                         variant={"outline"}
                         size={"sm"}
                         onClick={() => {
-                          fileInput.current?.click();
+                          fileInput?.current?.click();
                         }}
                       >
                         Upload
                       </Button>
                     </div>
-                    <Button className="ml-auto mt-auto">Post</Button>
+                    <Button className="ml-auto mt-auto" type="button" onClick={createNewPost}>
+                      Post
+                    </Button>
                   </div>
                 </ModalBody>
               </ModalContent>

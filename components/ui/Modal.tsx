@@ -1,5 +1,6 @@
 "use client";
 import useOnClickOutside from "@/hooks/useOnClickOutside";
+import cn from "@/utils/cn";
 import React, { ReactNode, useState, type ComponentProps, createContext, Ref } from "react";
 
 const ModalVisualContext = createContext<[boolean, (isOpen: boolean) => void]>([false, () => {}]);
@@ -14,16 +15,26 @@ export function ModalHeader({ ...props }: ComponentProps<"div">) {
 }
 
 export function ModalBody({ ...props }: ComponentProps<"div">) {
-  return <div {...props} />;
+  return <div {...props} className={cn("z-[1000]", props.className)} />;
 }
 
-export function ModalCloseButton({ children }: { children: ReactNode }) {
-  const [_isOpen, setIsOpen] = React.useContext(ModalVisualContext);
+export function ModalCloseButton({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  const [, setIsOpen] = React.useContext(ModalVisualContext);
 
   const clickHandler = () => {
     setIsOpen(false);
   };
-  return <button onClick={clickHandler}>{children}</button>;
+  return (
+    <button onClick={clickHandler} className={cn("w-fit", className)}>
+      {children}
+    </button>
+  );
 }
 
 export function ToggleButton({ ...props }: ComponentProps<"button">) {
@@ -45,11 +56,11 @@ export function ModalContent({ ...props }: ComponentProps<"div">) {
   });
 
   return isOpen ? (
-    <div className="fixed inset-0 z-[1000] flex items-center justify-center bg-black bg-opacity-50">
+    <div className="fixed inset-0 z-[1000] flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
       <div
         {...props}
         ref={ref as Ref<HTMLDivElement | null>}
-        className="w-full max-w-md p-4 text-center"
+        className="z-[1000] p-4 text-center"
       />
     </div>
   ) : null;
