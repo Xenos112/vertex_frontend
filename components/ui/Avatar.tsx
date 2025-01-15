@@ -16,7 +16,7 @@ type AvatarProps = ComponentProps<"div">;
 
 type ImageLoadingContextType = [boolean, Dispatch<SetStateAction<boolean>>];
 
-const ImageLoadingContext = createContext<ImageLoadingContextType>([false, () => { }]);
+const ImageLoadingContext = createContext<ImageLoadingContextType>([false, () => {}]);
 function Avatar({ ...props }: AvatarProps) {
   const [loading, setLoading] = useState(true);
 
@@ -52,7 +52,7 @@ function AvatarImage({ ...props }: AvatarImageProps) {
     const fetchImage = async () => {
       try {
         setLoading(true);
-
+        if (!props.src) return;
         const res = await vertex.get<Blob>(props.src as string);
         if (!res.ok) {
           // TODO: handle error case
@@ -66,7 +66,8 @@ function AvatarImage({ ...props }: AvatarImageProps) {
         // TODO: handle Errors
         console.log(error);
       } finally {
-        setLoading(false);
+        if(!props.src) setLoading(true)
+        else setLoading(false);
       }
     };
 
