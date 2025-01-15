@@ -3,7 +3,7 @@ import Button from "@/components/ui/Button";
 import cn from "@/utils/cn";
 import { Hash, Worm, Bell, Bookmark, User, Users, Search, Sun, Moon, X } from "lucide-react";
 import Link, { type LinkProps } from "next/link";
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { ReactNode, useRef, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 import { useUserStore } from "@/store/user";
 import Typography from "@/components/ui/Typography";
