@@ -8,7 +8,7 @@ export default function Input({ ...props }: InputProps) {
     <input
       {...props}
       className={cn(
-        "bg-input-background w-full rounded-xl px-4 py-2 outline-none",
+        "w-full rounded-xl bg-input-background px-4 py-2 outline-none focus:ring-2 focus:ring-primary",
         props.className,
       )}
     />

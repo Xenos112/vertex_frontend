@@ -3,12 +3,13 @@ import Button from "@/components/ui/Button";
 import cn from "@/utils/cn";
 import { Hash, Worm, Bell, Bookmark, User, Users, Search, Sun, Moon } from "lucide-react";
 import Link, { type LinkProps } from "next/link";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 import { useUserStore } from "@/store/user";
 import Typography from "@/components/ui/Typography";
 import useOnClickOutside from "@/hooks/useOnClickOutside";
 import { useTheme } from "next-themes";
+import { Modal, ModalBody, ModalContent, ModalHeader, ToggleButton } from "@/components/ui/Modal";
 
 function NavItem({
   href,
@@ -32,13 +33,13 @@ function NavItem({
 export default function LeftNavBar() {
   const user = useUserStore((state) => state.user);
   const [isMobileSideBarOpen, setIsMobileSideBarOpen] = useState(false);
-  const ref = useOnClickOutside<HTMLDivElement>(() => setIsMobileSideBarOpen(false));
+  const ref = useOnClickOutside(() => setIsMobileSideBarOpen(false));
   const { theme, setTheme } = useTheme();
 
   return (
     <>
       <div
-        ref={ref}
+        ref={ref as any}
         className={`sticky top-0 flex h-screen flex-col items-stretch justify-between overflow-hidden px-10 py-5 max-xl:w-fit max-lg:px-4 max-sm:fixed max-sm:w-[70vw] max-sm:bg-gray-200/80 max-sm:backdrop-blur max-sm:duration-500 max-sm:dark:bg-black/80 ${isMobileSideBarOpen ? "max-sm:translate-x-0" : "max-sm:-translate-x-full"}`}
       >
         <div className="flex flex-col gap-8">
@@ -88,9 +89,31 @@ export default function LeftNavBar() {
                 <span className="max-lg:hidden max-sm:block">Profile</span>
               </NavItem>
             )}
-            <Button size="icon-md" className="hover:ring-0 hover:ring-offset-0 max-lg:hidden">
-              Post
-            </Button>
+            <Modal>
+              <ToggleButton>
+                <Button className="w-full rounded-full">Post</Button>
+              </ToggleButton>
+              <ModalContent className="bg-blue-300">
+                {/* Modal */}
+                <ModalHeader>
+                  <h3 className="text-lg font-bold">Navigate</h3>
+                </ModalHeader>
+                <ModalBody>
+                  <div className="grid grid-cols-2 gap-6">
+                    <Link href="/explore">
+                      <Button variant={"link"} className="w-full">
+                        Explore
+                      </Button>
+                    </Link>
+                    <Link href="/settings">
+                      <Button variant={"link"} className="w-full">
+                        Settings
+                      </Button>
+                    </Link>
+                  </div>
+                </ModalBody>
+              </ModalContent>
+            </Modal>
           </div>
         </div>
 
