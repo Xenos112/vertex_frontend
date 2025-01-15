@@ -1,15 +1,24 @@
 "use client";
 import Button from "@/components/ui/Button";
 import cn from "@/utils/cn";
-import { Hash, Worm, Bell, Bookmark, User, Users, Search, Sun, Moon } from "lucide-react";
+import { Hash, Worm, Bell, Bookmark, User, Users, Search, Sun, Moon, X } from "lucide-react";
 import Link, { type LinkProps } from "next/link";
-import { ReactNode, useState } from "react";
+import { ReactNode, useRef, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 import { useUserStore } from "@/store/user";
 import Typography from "@/components/ui/Typography";
 import useOnClickOutside from "@/hooks/useOnClickOutside";
 import { useTheme } from "next-themes";
-import { Modal, ModalBody, ModalContent, ModalHeader, ToggleButton } from "@/components/ui/Modal";
+import {
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ToggleButton,
+} from "@/components/ui/Modal";
+
+// my import
+import Input from "@/components/ui/Input";
 
 function NavItem({
   href,
@@ -35,6 +44,9 @@ export default function LeftNavBar() {
   const [isMobileSideBarOpen, setIsMobileSideBarOpen] = useState(false);
   const ref = useOnClickOutside(() => setIsMobileSideBarOpen(false));
   const { theme, setTheme } = useTheme();
+
+  // my changes
+  const fileInput = useRef(null);
 
   return (
     <>
@@ -95,21 +107,45 @@ export default function LeftNavBar() {
               </ToggleButton>
               <ModalContent className="bg-blue-300">
                 {/* Modal */}
-                <ModalHeader>
-                  <h3 className="text-lg font-bold">Navigate</h3>
-                </ModalHeader>
                 <ModalBody>
-                  <div className="grid grid-cols-2 gap-6">
-                    <Link href="/explore">
-                      <Button variant={"link"} className="w-full">
-                        Explore
+                  <div className="flex min-h-[230px] flex-col rounded-lg bg-black p-[24px]">
+                    <input type="file" name="" id="" ref={fileInput as any} className="hidden" />
+                    <ModalCloseButton>
+                      <X
+                        size={30}
+                        color="white"
+                        strokeWidth={1.5}
+                        className="mb-2 ml-auto cursor-pointer font-bold"
+                      />
+                    </ModalCloseButton>
+                    {/*  form  */}
+                    <div className="flex items-center justify-between">
+                      {user ? (
+                        <Avatar>
+                          <AvatarImage className="size-[50px]" src={user.image_url} />
+                          <AvatarFallback>{user?.user_name}</AvatarFallback>
+                        </Avatar>
+                      ) : (
+                        <User className="size-[40] text-white" />
+                      )}
+                      <Input
+                        placeholder="Share Your Thoughts..."
+                        type="text"
+                        name="text"
+                        className="mx-2 bg-transparent"
+                      />
+                      <Button
+                        className=""
+                        variant={"outline"}
+                        size={"sm"}
+                        onClick={() => {
+                          fileInput.current?.click();
+                        }}
+                      >
+                        Upload
                       </Button>
-                    </Link>
-                    <Link href="/settings">
-                      <Button variant={"link"} className="w-full">
-                        Settings
-                      </Button>
-                    </Link>
+                    </div>
+                    <Button className="ml-auto mt-auto">Post</Button>
                   </div>
                 </ModalBody>
               </ModalContent>
