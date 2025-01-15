@@ -23,7 +23,6 @@ import useToaster from "@/hooks/useToaster";
 import { redirect } from "next/navigation";
 import useAfterMount from "@/hooks/useAfterMount";
 
-
 function NavItem({
   href,
   children,
@@ -48,7 +47,7 @@ export default function LeftNavBar() {
   const [isMobileSideBarOpen, setIsMobileSideBarOpen] = useState(false);
   const ref = useOnClickOutside(() => setIsMobileSideBarOpen(false));
   const { theme, setTheme } = useTheme();
-  const fileInput = useRef(null);
+  const fileInput = useRef<HTMLInputElement>(null);
   const [files, setFiles] = useState<FileList | null>(null);
   const [urls, setUrls] = useState<string[] | null>();
   const [postContent, setPostContent] = useState<string>("");
@@ -179,9 +178,7 @@ export default function LeftNavBar() {
                         className="text-sm"
                         variant={"outline"}
                         size={"sm"}
-                        onClick={() => {
-                          fileInput?.current?.click();
-                        }}
+                        onClick={() => fileInput.current?.click()}
                       >
                         Upload
                       </Button>
