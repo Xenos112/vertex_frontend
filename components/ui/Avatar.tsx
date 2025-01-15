@@ -1,5 +1,6 @@
 "use client";
 import vertex from "@/api";
+import useToaster from "@/hooks/useToaster";
 import cn from "@/utils/cn";
 import React, {
   useEffect,
@@ -47,6 +48,7 @@ type AvatarImageProps = Omit<ComponentProps<"img">, "src"> & { src: string | nul
 function AvatarImage({ ...props }: AvatarImageProps) {
   const [loading, setLoading] = use(ImageLoadingContext);
   const [imageSrc, setImageSrc] = useState("");
+  const toaster = useToaster()
 
   useEffect(() => {
     const fetchImage = async () => {
@@ -55,7 +57,7 @@ function AvatarImage({ ...props }: AvatarImageProps) {
         if (!props.src) return;
         const res = await vertex.get<Blob>(props.src as string);
         if (!res.ok) {
-          // TODO: handle error case
+          toaster.error('failed to fetch image')
         }
 
         const imageBlob = await res.blob();
@@ -63,8 +65,7 @@ function AvatarImage({ ...props }: AvatarImageProps) {
         const imageUrl = URL.createObjectURL(imageBlob);
         setImageSrc(imageUrl);
       } catch (error) {
-        // TODO: handle Errors
-        console.log(error);
+        toaster.error('something went wrong when fetching image')
       } finally {
         if(!props.src) setLoading(true)
         else setLoading(false);
