@@ -1,7 +1,7 @@
 // TODO: implement (finish)
 
 import { Post } from "@/types";
-import vertex from "..";
+import vertex from "@/api";
 type DataResponse = {
   data: Post;
 };

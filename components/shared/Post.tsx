@@ -2,10 +2,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 import { type Post } from "@/types";
 import { useState, createContext, use } from "react";
 import { BookMarked, Heart, MessageCircle, Share2 } from "lucide-react";
-import likePost from "@/api/posts/like-post";
-import dislikePost from "@/api/posts/dislike-post";
-import savePost from "@/api/posts/save-post";
-import unsavePost from "@/api/posts/unsave-post";
+import likePost from "@/features/post/api/like-post";
+import dislikePost from "@/features/post/api/dislike-post";
+import savePost from "@/features/post/api/save-post";
+import unsavePost from "@/features/post/api/unsave-post";
 import useToaster from "@/hooks/useToaster";
 import copyPostUrl from "@/utils/generate-post-url";
 import { useUserStore } from "@/store/user";
@@ -173,9 +173,7 @@ export function Author() {
           <Typography className="text-grayish" variant="tag" as="span">
             @tag
           </Typography>
-          <span className="text-grayish">
-           ●
-          </span>
+          <span className="text-grayish">●</span>
           <span className="text-grayish">{new Date(post.created_at as Date).toLocaleString()}</span>
         </div>
       </div>
