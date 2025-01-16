@@ -11,6 +11,8 @@ import { User, X } from "lucide-react";
 import { redirect } from "next/navigation";
 import { useRef, useState } from "react";
 
+const IMAGE_REGEX = /\.(png|jpg|jpeg|gif|svg)$/i;
+
 export default function CreatePostModal() {
   const [files, setFiles] = useState<FileList | null>(null);
   const user = useUserStore((state) => state.user);
@@ -65,7 +67,6 @@ export default function CreatePostModal() {
       <ModalCloseButton className="ml-auto">
         <X size={24} color="white" className="mb-[24px] ml-auto cursor-pointer" />
       </ModalCloseButton>
-      {/*  form  */}
       <div className="flex items-center justify-between gap-3">
         {user ? (
           <Avatar>
@@ -92,9 +93,21 @@ export default function CreatePostModal() {
           Upload
         </Button>
       </div>
-      <Button className="ml-auto mt-auto" type="button" onClick={createNewPost}>
-        Post
-      </Button>
+      <div className="mt-auto flex justify-between gap-1 text-white">
+        {urls
+          ?.filter((url) => IMAGE_REGEX.test(url))
+          .slice(0, 3)
+          .map((url) => (
+            <div key={url}>
+              <img src={url} width={200} className="contain" />
+            </div>
+          ))}
+        <div className="ml-auto mt-auto">
+          <Button type="button" onClick={createNewPost}>
+            Post
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }
