@@ -8,11 +8,12 @@ export default {
     "./layouts/**/*.{js,ts,jsx,tsx,mdx}",
     "./providers/**/*.{js,ts,jsx,tsx,mdx}",
     "./hooks/**/*.{js,ts,jsx,tsx,mdx}",
+    "./features/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
-      container:{
-        screens:{
+      container: {
+        screens: {
           lg: "1200px"
         }
       },

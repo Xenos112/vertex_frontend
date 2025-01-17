@@ -31,7 +31,7 @@ export default function page() {
             </Button>
           </div>
         </ToggleButton>
-        <ModalContent>
+        <ModalContent className='min-w-[550px]'>
           <CreatePostModal />
         </ModalContent>
       </Modal>

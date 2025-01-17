@@ -2,10 +2,9 @@ import { ToasterContext } from "@/providers/ToasterProvider";
 import React, { type MouseEventHandler, ReactNode, use, ReactElement } from "react";
 import { X, Check, CircleX, Info } from "lucide-react";
 
-
 type ToastProps = {
   delay?: number;
-}
+};
 
 const Toast = ({
   text,
@@ -21,7 +20,7 @@ const Toast = ({
   icon: ReactElement;
 }) => {
   return (
-    <div className="relative flex gap-4 rounded-xl bg-white p-4 dark:bg-background animate-appear">
+    <div className="relative flex animate-appear gap-4 rounded-xl bg-white p-4 dark:bg-background">
       <button
         className="absolute right-4 top-4"
         onClick={close as MouseEventHandler<HTMLButtonElement>}
@@ -31,7 +30,7 @@ const Toast = ({
       <div>{icon as ReactNode}</div>
       <p className="max-w-[80%] flex-1 truncate">{text}</p>
       <span
-        className="animate-fade-in absolute bottom-0 left-0 h-[3px] w-full content-['']"
+        className="absolute bottom-0 left-0 h-[3px] w-full animate-fade-in content-['']"
         style={{
           background: background ?? "#2658fd",
         }}

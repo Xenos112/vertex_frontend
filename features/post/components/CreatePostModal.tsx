@@ -30,10 +30,14 @@ export default function CreatePostModal() {
     const res = await createPost({ content: postContent, medias: urls! });
     if (res.data.id) {
       toast.success("Post created successfully");
+    } else {
+      toast.error("Failed to create a new post");
     }
   };
 
   const uploadFiles = async () => {
+    if (files?.length === 0) return;
+
     const formData = new FormData();
 
     if (files) {
@@ -42,19 +46,23 @@ export default function CreatePostModal() {
       }
     }
 
-    const res = await uploadMedias(formData);
-    if (res.urls.length > 0) {
-      setUrls(res.urls);
-      toast.success("files uploaded successfully");
+    try {
+      const res = await uploadMedias(formData);
+      if (res.urls.length > 0) {
+        setUrls(res.urls);
+        toast.success("files uploaded successfully");
+      }
+    } catch (error) {
+      toast.error("Failed to upload Media to the server");
     }
   };
 
   useAfterMount(() => {
     uploadFiles();
-  }, [files?.[0].name]);
+  }, [files?.[0]?.name]);
 
   return (
-    <div className="flex min-h-[300px] flex-col rounded-lg bg-black p-[24px]">
+    <div className="flex min-h-[250px] flex-col rounded-lg bg-black p-[24px]">
       <input
         type="file"
         name="file"

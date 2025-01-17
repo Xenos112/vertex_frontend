@@ -8,7 +8,6 @@ type ReturnResponse = {
 };
 
 export default async function uploadMedias(formData: FormData) {
-  //TEST: see if the fetch accepts formData as a body
   const res = await vertex.post<ReturnResponse>("http://localhost:4000/upload", {
     body: formData,
   });

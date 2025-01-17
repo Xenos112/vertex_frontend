@@ -95,7 +95,7 @@ export default function LeftNavBar() {
                 <Button className="w-full rounded-full">Post</Button>
               </ToggleButton>
               <ModalContent className="bg-blue-300">
-                <ModalBody className="min-w-[600px]">
+                <ModalBody className="min-w-[500px]">
                   <CreatePostModal />
                 </ModalBody>
               </ModalContent>
