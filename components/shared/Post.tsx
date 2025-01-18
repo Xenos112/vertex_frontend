@@ -1,3 +1,4 @@
+'use client';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 import { type Post } from "@/types";
 import { useState, createContext, use } from "react";
@@ -42,16 +43,18 @@ export function Content({ children }: { children: React.ReactNode }) {
     <div className="mt-3 flex flex-col gap-4 pl-[48px]">
       <div className="flex flex-col gap-3">
         <p>{post.content}</p>
-        <div className={`${className} grid h-[400px] gap-2 overflow-hidden rounded-md`}>
-          {post.pictures.length > 0 &&
-            post.pictures.map((picture) =>
-              picture.type === "image" ? (
-                <img className="h-full w-full object-cover" src={picture.url} />
-              ) : (
-                <video className="h-full w-full object-cover" src={picture.url} />
-              ),
-            )}
-        </div>
+        {post.pictures.length > 0 && (
+          <div className={`${className} grid h-[400px] gap-2 overflow-hidden rounded-md`}>
+            {post.pictures.length > 0 &&
+              post.pictures.map((picture) =>
+                picture.type === "image" ? (
+                  <img className="h-full w-full object-cover" src={picture.url} />
+                ) : (
+                  <video className="h-full w-full object-cover" src={picture.url} />
+                ),
+              )}
+          </div>
+        )}
       </div>
       {children}
     </div>
@@ -164,8 +167,8 @@ export function Author() {
   return (
     <div className="flex items-center gap-3">
       <Avatar>
-        <AvatarImage src={post.author?.avatar.url} />
-        <AvatarFallback>{post.author?.user_name}</AvatarFallback>
+        <AvatarImage src={post.author?.avatar?.url} />
+        <AvatarFallback>{post.author.user_name}</AvatarFallback>
       </Avatar>
       <div>
         <p>{post.author.user_name}</p>
