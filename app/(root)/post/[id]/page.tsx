@@ -16,12 +16,11 @@ const usePostFetcher = (id: string): [TPost | null, string | null] => {
         setError(post.error);
         return;
       }
-
       setPostData(post);
     };
 
     fetchPost();
-  }, []);
+  }, [id]);
 
   return [postData, error];
 };
