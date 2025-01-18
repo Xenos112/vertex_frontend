@@ -25,15 +25,9 @@ export default function page() {
     }
 
     const data = await login(email, password);
+    console.log(data);
     if ("error" in data) {
       toaster.error(data.error as string)
-      return;
-    }
-
-    if ((data as string[]).at(0)) {
-      (data as string[]).forEach((error) => {
-        toaster.error(error as string)
-      });
       return;
     }
 
@@ -43,6 +37,14 @@ export default function page() {
       toaster.success("Login Successfull")
       redirect("/");
     }
+
+    if ((data as string[]).at(0)) {
+      (data as string[]).forEach((error) => {
+        toaster.error(error as string)
+      });
+      return;
+    }
+
   }
 
   return (

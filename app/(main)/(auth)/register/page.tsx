@@ -26,6 +26,13 @@ export default function page() {
     }
 
     const data = await register(userName, email, password);
+    if ("token" in data) {
+      localStorage.setItem("auth_token", data.token);
+      await fetchUser();
+      toaster.success("Login Successfull");
+      redirect("/");
+    }
+
     if ("error" in data) {
       toaster.error(data.error as string);
       return;
@@ -38,12 +45,6 @@ export default function page() {
       return;
     }
 
-    if ("token" in data) {
-      localStorage.setItem("auth_token", data.token);
-      await fetchUser();
-      toaster.success("Login Successfull");
-      redirect("/");
-    }
   }
 
   return (
