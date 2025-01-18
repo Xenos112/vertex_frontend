@@ -26,7 +26,7 @@ export default function CreatePostModal() {
       toast.error("You must be logged in to create a post");
       redirect("/login");
     }
-    toast.success("test");
+
     const res = await createPost({ content: postContent, medias: urls! });
     if (res.data.id) {
       toast.success("Post created successfully");
