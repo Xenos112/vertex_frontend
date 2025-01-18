@@ -15,8 +15,9 @@ export default async function createPost({
     credentials: "include",
     body: JSON.stringify({
       content,
-      medias,
+      urls: medias,
     }),
+    throwHttpErrors: false,
   });
 
   if (res.status !== 200) {
