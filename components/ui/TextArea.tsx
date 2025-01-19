@@ -6,6 +6,8 @@ interface AdaptiveTextareaProps extends TextareaHTMLAttributes<HTMLTextAreaEleme
   maxHeight?: number
 }
 
+// FIX: fix the height and the style of the textarea
+// TODO: make use of the component
 export default function AdaptiveTextarea({
   className,
   maxHeight = 200,
