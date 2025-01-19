@@ -9,23 +9,29 @@ import {
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import CreatePostModal from "@/features/post/components/CreatePostModal";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { User } from "lucide-react";
 
 export default function page() {
   const user = useUserStore((state) => state.user);
   const pathName = usePathname()
+  const searchParams = useSearchParams()
+
+  // TODO: make use of the search params
+  const isFeed = searchParams.get("t") === "communities";
 
 
   return (
     <main className="w-full border-x border-grayish">
       {/* TODO: make the selected tab active and more emphesised */}
       <div className="w-full flex gap-4 p-4 py-[21px] items-center justify-center unerline">
-        <Link href={`${pathName}?t=feed`}>
+        <Link href={`${pathName}?t=feed`} className={!isFeed ? "underline" : ""}>
           For You
         </Link>
-        <Link href={`${pathName}?t=communities`}>Communities</Link>
+        <Link href={`${pathName}?t=communities`} className={isFeed ? "underline" : ""}>
+          Communities
+        </Link>
       </div>
       <Modal>
         <ToggleButton className="w-full">
