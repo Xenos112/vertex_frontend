@@ -30,7 +30,7 @@ export default function PostPage() {
   const [post, error] = usePostFetcher(id);
 
   return (
-    <div className="w-full">
+    <div className="w-full border-x border-grayish">
       {post && (
         <Post post={post}>
           <Author />

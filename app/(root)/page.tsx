@@ -19,8 +19,8 @@ export default function page() {
 
 
   return (
-    <main className="w-full">
-    {/* TODO: make the selected tab active and more emphesised */}
+    <main className="w-full border-x border-grayish">
+      {/* TODO: make the selected tab active and more emphesised */}
       <div className="w-full flex gap-4 p-4 py-[21px] items-center justify-center unerline">
         <Link href={`${pathName}?t=feed`}>
           For You
@@ -36,7 +36,7 @@ export default function page() {
                   <AvatarImage src={user?.image_url!} alt={user?.user_name} />
                   <AvatarFallback>{user?.user_name}</AvatarFallback>
                 </Avatar>
-                ): <User size={30} />
+              ) : <User size={30} />
               }
               <Input placeholder="What's on your mind?" className="w-full bg-transparent" />
             </div>
