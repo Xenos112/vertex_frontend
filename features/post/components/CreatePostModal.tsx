@@ -103,14 +103,30 @@ export default function CreatePostModal() {
         </Button>
       </div>
       <div className="mt-auto flex justify-between gap-1 text-white">
-        {urls
+        {urls ? urls
           ?.filter((url) => IMAGE_REGEX.test(url))
           .slice(0, 3)
           .map((url) => (
             <div key={url}>
               <img src={url} width={200} className="contain" />
             </div>
-          ))}
+          )) :
+          <div className="relative">
+            <input
+              type="file"
+              accept="image/*"
+              className="w-full h-full bg-red-400 opacity-0 cursor-pointer"
+            />
+            <span className="absolute left-0 top-0 text-grayish text-center w-full">
+              Drag and drop your files to upload
+            </span>
+            <img
+              id="image-preview"
+              style={{ display: 'none', marginTop: '10px', maxWidth: '100%' }}
+              alt="Preview"
+            />
+          </div>
+        }
         <div className="ml-auto mt-auto">
           <Button type="button" onClick={createNewPost}>
             Post
