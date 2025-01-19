@@ -12,6 +12,7 @@ import copyPostUrl from "@/utils/generate-post-url";
 import { useUserStore } from "@/store/user";
 import { redirect } from "next/navigation";
 import Typography from "../ui/Typography";
+import Link from "next/link";
 
 const PostContext = createContext<Post | null>(null);
 
@@ -204,4 +205,14 @@ export function Share() {
   );
 }
 
+export function PostNotFound() {
+  return (
+    <div className="flex flex-col items-center justify-center gap-4 p-6 h-full">
+      <h1 className="text-3xl font-bold">404</h1>
+      <p className='font-medium'>Post not found or No Longer Available</p>
+      <Link className='underline' href="/">Go to home</Link>
+    </div>
+  );
+
+}
 // TODO: fetch the tag from the backend and display it
