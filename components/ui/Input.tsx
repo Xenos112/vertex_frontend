@@ -15,4 +15,3 @@ export default function Input({ ...props }: InputProps) {
   );
 }
 
-// TODO: add more styles and focus styles
