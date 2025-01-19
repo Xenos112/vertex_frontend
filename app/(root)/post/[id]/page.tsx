@@ -1,29 +1,8 @@
 "use client";
-import getPost from "@/features/post/api/get-post";
-import { Post as TPost } from "@/types";
-import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { Author, Share, Comments, Content, Like, Post, Save, PostNotFound } from "@/components/shared/Post";
+import usePostFetcher from "@/features/post/hooks/usePostFetcher";
 
-const usePostFetcher = (id: string): [TPost | null, string | null] => {
-  const [postData, setPostData] = useState<TPost | null>(null);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchPost = async () => {
-      const post = await getPost(id);
-      if ("error" in post) {
-        setError(post.error);
-        return;
-      }
-      setPostData(post);
-    };
-
-    fetchPost();
-  }, [id]);
-
-  return [postData, error];
-};
 
 export default function PostPage() {
   const { id } = useParams() as { id: string };
