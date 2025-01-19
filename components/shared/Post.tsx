@@ -37,7 +37,6 @@ export function Content({ children }: { children: React.ReactNode }) {
             ? "grid-cols-2 grid-rows-2"
             : `grid`;
 
-  // TODO: make the layout accept multiple images or videos cuz now its only for the testing fase
   // TODO: make the pictures have links
   return (
     <div className="mt-3 flex flex-col gap-4 pl-[48px]">
