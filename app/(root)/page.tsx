@@ -24,7 +24,6 @@ export default function page() {
 
   return (
     <main className="w-full border-x border-grayish">
-      {/* TODO: make the selected tab active and more emphesised */}
       <div className="w-full flex gap-4 p-4 py-[21px] items-center justify-center unerline">
         <Link href={`${pathName}?t=feed`} className={!isFeed ? "underline" : ""}>
           For You
