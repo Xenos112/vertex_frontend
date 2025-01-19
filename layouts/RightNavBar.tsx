@@ -7,9 +7,8 @@ import Input from "@/components/ui/Input";
 import { useUserStore } from "@/store/user";
 import { Loader2, Search } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 import Form from "next/form";
+import { useEffect, useState } from "react";
 
 const useUserSuggestions = () => {
   const [usersToFollow, setUsersToFollow] = useState<UserSuggestion[] | undefined>();
@@ -67,13 +66,14 @@ function WhoToFollowSection() {
           <Loader2 size={40} className="animate-spin" />
         </div>
       ) : usersToFollow ? (
-        <div className="mt-2 space-y-2">
+        <div className="mt-2 space-y-5">
           {usersToFollow.map((user) => (
-            <div key={user.ID}>
+            <div key={user.id} className="flex items-center gap-2 justify-between">
               <Avatar>
-                <AvatarImage src={user.ProfileImage} alt={user.UserName} />
-                <AvatarFallback>{user.UserName}</AvatarFallback>
+                <AvatarImage src={user.image?.url as (string | null)} alt={user.user_name} />
+                <AvatarFallback>{user.user_name}</AvatarFallback>
               </Avatar>
+              <Button size='sm'>Follow</Button>
             </div>
           ))}
         </div>

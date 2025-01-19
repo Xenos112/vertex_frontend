@@ -1,16 +1,32 @@
 import vertex from ".";
-// TODO: re-implement this using the old api
+
+type Image = {
+  id: string;
+  url: string;
+  type: "image" | "video";
+  target_type: "user:image" | "user:banner" | "post";
+  target_id: string;
+  created_at: Date | null;
+} | null
 
 export type UserSuggestion = {
-  ID: string;
-  UserName: string;
-  ProfileImage: string;
-};
+  id: string;
+  created_at: Date | null;
+  user_name: string;
+  email: string | null;
+  github_id: string | null;
+  discord_id: string | null;
+  password: string | null;
+  bio: string | null;
+  image_id: string | null;
+  banner_id: string | null;
+  image: Image
+}
 
 export default async function whoToFollow() {
   try {
     const res = await vertex.get<{ data: UserSuggestion[] }>(
-      "http://localhost:8080/authenticated/who-to-follow",
+      "http://localhost:4000/who-to-follow",
       { credentials: "include" },
     );
     if (!res.ok) {

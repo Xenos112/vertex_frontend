@@ -16,6 +16,7 @@ type UserStore = {
   loading: boolean;
   setUser: (user: any) => void;
   fetchUser: () => Promise<void>;
+  followUser: (userId: string) => Promise<void>;
 };
 
 export const useUserStore = create<UserStore>()((set) => ({
@@ -43,4 +44,8 @@ export const useUserStore = create<UserStore>()((set) => ({
       set({ loading: false });
     }
   },
+  followUser: async (_userId: string) => {
+    // TODO: implement
+    try { } catch (error) { }
+  }
 }));
