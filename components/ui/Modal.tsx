@@ -3,7 +3,7 @@ import useOnClickOutside from "@/hooks/useOnClickOutside";
 import cn from "@/utils/cn";
 import React, { ReactNode, useState, type ComponentProps, createContext, Ref } from "react";
 
-const ModalVisualContext = createContext<[boolean, (isOpen: boolean) => void]>([false, () => {}]);
+const ModalVisualContext = createContext<[boolean, (isOpen: boolean) => void]>([false, () => { }]);
 
 export function Modal({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,7 +11,7 @@ export function Modal({ children }: { children: ReactNode }) {
 }
 
 export function ModalHeader({ ...props }: ComponentProps<"div">) {
-  return <div {...props} />;
+  return <div {...props} className={cn("font-semibold text-lg", props.className)} />;
 }
 
 export function ModalBody({ ...props }: ComponentProps<"div">) {
@@ -31,7 +31,7 @@ export function ModalCloseButton({
     setIsOpen(false);
   };
   return (
-    <button onClick={clickHandler} className={cn("w-fit", className)}>
+    <button onClick={clickHandler} className={cn("w-fit absolute top-4 right-4", className)}>
       {children}
     </button>
   );
@@ -60,7 +60,7 @@ export function ModalContent({ ...props }: ComponentProps<"div">) {
       <div
         {...props}
         ref={ref as Ref<HTMLDivElement | null>}
-        className="z-[1000] p-4 text-center"
+        className="z-[1000] relative border-grayish border rounded-md max-w-[500px] w-full max-h-[250px] h-full p-4 text-center"
       />
     </div>
   ) : null;

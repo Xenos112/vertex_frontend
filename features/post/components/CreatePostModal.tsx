@@ -3,7 +3,7 @@ import uploadMedias from "@/api/posts/upload-medias";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
-import { ModalCloseButton } from "@/components/ui/Modal";
+import { ModalCloseButton, ModalHeader } from "@/components/ui/Modal";
 import useAfterMount from "@/hooks/useAfterMount";
 import useToaster from "@/hooks/useToaster";
 import { useUserStore } from "@/store/user";
@@ -62,7 +62,8 @@ export default function CreatePostModal() {
   }, [files?.[0]?.name]);
 
   return (
-    <div className="flex min-h-[250px] flex-col rounded-lg bg-black p-[24px]">
+    <div className="flex gap-4 flex-col rounded-lg bg-black h-full w-full">
+      <ModalHeader className='self-start'>Create Post</ModalHeader>
       <input
         type="file"
         name="file"
@@ -72,8 +73,8 @@ export default function CreatePostModal() {
         className="hidden"
         onChange={(e) => setFiles(e.target.files)}
       />
-      <ModalCloseButton className="ml-auto">
-        <X size={24} color="white" className="mb-[24px] ml-auto cursor-pointer" />
+      <ModalCloseButton>
+        <X size={20} className="mb-[24px] ml-auto cursor-pointer text-[#919191]" />
       </ModalCloseButton>
       <div className="flex items-center justify-between gap-3">
         {user ? (
