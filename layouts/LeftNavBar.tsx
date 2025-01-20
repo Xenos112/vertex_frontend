@@ -60,7 +60,7 @@ export default function LeftNavBar() {
             </Link>
           </div>
           <div className="flex flex-col gap-5">
-            <NavItem href="/">
+            <NavItem href="/?t=feed">
               <Hash className="size-[24] max-lg:size-[30] max-sm:size-[24]" />
               <span className="max-lg:hidden max-sm:block">Feed</span>
             </NavItem>
