@@ -12,6 +12,7 @@ import CreatePostModal from "@/features/post/components/CreatePostModal";
 import { usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { User } from "lucide-react";
+import { useRef } from "react";
 
 export default function page() {
   const user = useUserStore((state) => state.user);
@@ -20,7 +21,11 @@ export default function page() {
 
   // TODO: make use of the search params
   const isFeed = searchParams.get("t") === "communities";
+  const modalButtonRef = useRef<HTMLButtonElement>(null);
 
+  const onInputFocus = () => {
+    modalButtonRef.current?.click();
+  };
 
   return (
     <main className="w-full border-x border-grayish">
@@ -33,7 +38,7 @@ export default function page() {
         </Link>
       </div>
       <Modal>
-        <ToggleButton className="w-full">
+        <ToggleButton ref={modalButtonRef} className="w-full">
           <div className="flex items-center justify-between border-y border-grayish px-6 py-[15px]">
             <div className="flex gap-4 items-center">
               {user ? (
@@ -43,7 +48,7 @@ export default function page() {
                 </Avatar>
               ) : <User size={30} />
               }
-              <Input placeholder="What's on your mind?" className="w-full bg-transparent" />
+              <Input onFocus={onInputFocus} placeholder="What's on your mind?" />
             </div>
             <Button variant="outline" size={"sm"}>
               Post
