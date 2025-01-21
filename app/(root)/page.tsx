@@ -48,14 +48,14 @@ export default function page() {
                 </Avatar>
               ) : <User size={30} />
               }
-              <Input onFocus={onInputFocus} placeholder="What's on your mind?" />
+              <Input onFocus={onInputFocus} placeholder="What's on your mind?" className='focus:outline-0 focus:ring-0 bg-transparent w-full' />
             </div>
             <Button variant="outline" size={"sm"}>
               Post
             </Button>
           </div>
         </ToggleButton>
-        <ModalContent className='min-w-[550px]'>
+        <ModalContent>
           <CreatePostModal />
         </ModalContent>
       </Modal>
