@@ -72,7 +72,7 @@ export default function LeftNavBar() {
               <Users className="size-[24] max-lg:size-[30] max-sm:size-[24]" />
               <span className="max-lg:hidden max-sm:block">Communities</span>
             </NavItem>
-            <NavItem href="/bookmarks">
+            <NavItem href="/saved">
               <Bookmark className="size-[24] max-lg:size-[30] max-sm:size-[24]" />
               <span className="max-lg:hidden max-sm:block">Saved Posts</span>
             </NavItem>
@@ -94,10 +94,8 @@ export default function LeftNavBar() {
               <ToggleButton>
                 <Button className="w-full rounded-full">Post</Button>
               </ToggleButton>
-              <ModalContent className="bg-blue-300">
-                <ModalBody className="min-w-[500px]">
-                  <CreatePostModal />
-                </ModalBody>
+              <ModalContent>
+                <CreatePostModal />
               </ModalContent>
             </Modal>
           </div>

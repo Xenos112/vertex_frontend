@@ -62,7 +62,7 @@ export default function CreatePostModal() {
   }, [files?.[0]?.name]);
 
   return (
-    <div className="flex gap-4 flex-col rounded-lg bg-black h-full w-full">
+    <div className="flex gap-4 flex-col rounded-lg h-full w-full">
       <ModalHeader className='self-start'>Create Post</ModalHeader>
       <input
         type="file"
@@ -83,7 +83,7 @@ export default function CreatePostModal() {
             <AvatarFallback>{user?.user_name}</AvatarFallback>
           </Avatar>
         ) : (
-          <User className="size-[40] text-white" />
+          <User className="size-[40] text-black dark:text-white" />
         )}
         <Input
           placeholder="Share Your Thoughts..."

@@ -60,7 +60,7 @@ export function ModalContent({ ...props }: ComponentProps<"div">) {
       <div
         {...props}
         ref={ref as Ref<HTMLDivElement | null>}
-        className="z-[1000] relative border-grayish border rounded-md max-w-[500px] w-full max-h-[250px] h-full p-4 text-center"
+        className="z-[1000] bg-white dark:bg-black relative border-grayish border rounded-md max-w-[500px] w-full max-h-[250px] h-full p-4 text-center"
       />
     </div>
   ) : null;
