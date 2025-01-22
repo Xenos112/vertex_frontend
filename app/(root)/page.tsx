@@ -54,7 +54,7 @@ export default function page() {
           <div className="flex items-center justify-between border-y border-grayish px-6 py-[15px]">
             <div className="flex gap-4 items-center">
               {user ? (
-                <Avatar className="w-10 h-10">
+                <Avatar className="size-[50px]">
                   <AvatarImage src={user?.image_url!} alt={user?.user_name} />
                   <AvatarFallback>{user?.user_name}</AvatarFallback>
                 </Avatar>

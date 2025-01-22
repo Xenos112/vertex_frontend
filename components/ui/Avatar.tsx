@@ -17,7 +17,7 @@ type AvatarProps = ComponentProps<"div">;
 
 type ImageLoadingContextType = [boolean, Dispatch<SetStateAction<boolean>>];
 
-const ImageLoadingContext = createContext<ImageLoadingContextType>([false, () => {}]);
+const ImageLoadingContext = createContext<ImageLoadingContextType>([false, () => { }]);
 function Avatar({ ...props }: AvatarProps) {
   const [loading, setLoading] = useState(true);
 
