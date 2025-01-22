@@ -12,20 +12,32 @@ import CreatePostModal from "@/features/post/components/CreatePostModal";
 import { usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { User } from "lucide-react";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import fetchFeed from "@/api/posts/fetch-feed";
+import { Post as PostType } from "@/types";
+import useToaster from "@/hooks/useToaster";
+import { Post, Author, Comments, Content, Like, Save, Share, PostNotFound } from "@/components/shared/Post";
+import { usePostsStore } from "@/store/posts";
 
 export default function page() {
   const user = useUserStore((state) => state.user);
   const pathName = usePathname()
   const searchParams = useSearchParams()
+  const postFetcher = usePostsStore((state) => state.fetchFeed)
+  const posts = usePostsStore((state) => state.posts)
 
   // TODO: make use of the search params
   const isFeed = searchParams.get("t") === "communities";
   const modalButtonRef = useRef<HTMLButtonElement>(null);
+  const toaster = useToaster()
 
   const onInputFocus = () => {
     modalButtonRef.current?.click();
   };
+
+  useEffect(() => {
+    postFetcher()
+  }, []);
 
   return (
     <main className="w-full border-x border-grayish">
@@ -59,6 +71,23 @@ export default function page() {
           <CreatePostModal />
         </ModalContent>
       </Modal>
+      <div>
+        {posts.length > 0 ? posts.map(post => (
+          <Post key={post.id} post={post}>
+            <Author />
+            <Content>
+              <div className="flex items-center justify-between">
+                <div className="flex gap-[25px]">
+                  <Like />
+                  <Save />
+                  <Comments />
+                </div>
+                <Share />
+              </div>
+            </Content>
+          </Post>
+        )) : <PostNotFound />}
+      </div>
     </main>
   );
 }

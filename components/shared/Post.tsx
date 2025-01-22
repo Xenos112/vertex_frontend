@@ -26,7 +26,7 @@ export function Post({ post, children }: { post: Post; children: React.ReactNode
 
 export function Content({ children }: { children: React.ReactNode }) {
   const post = use(PostContext) as Post;
-  const picturesLength = post.pictures.length;
+  const picturesLength = post.pictures?.length;
   const className =
     picturesLength === 1
       ? "grid-cols-1"
@@ -42,11 +42,11 @@ export function Content({ children }: { children: React.ReactNode }) {
   return (
     <div className="mt-3 flex flex-col gap-4 pl-[48px]">
       <div className="flex flex-col gap-3">
-        <p>{post.content}</p>
-        {post.pictures.length > 0 && (
+        <p>{post?.content}</p>
+        {post?.pictures?.length > 0 && (
           <div className={`${className} grid h-[400px] gap-2 overflow-hidden rounded-md`}>
-            {post.pictures.length > 0 &&
-              post.pictures.map((picture) =>
+            {post.pictures?.length > 0 &&
+              post?.pictures?.map((picture) =>
                 picture.type === "image" ? (
                   <img className="h-full w-full object-cover" src={picture.url} />
                 ) : (
@@ -168,13 +168,12 @@ export function Author() {
     <div className="flex items-center gap-3">
       <Avatar>
         <AvatarImage src={post.author?.avatar?.url} />
-        <AvatarFallback>{post.author.user_name}</AvatarFallback>
+        <AvatarFallback>{post.author?.user_name}</AvatarFallback>
       </Avatar>
       <div>
-        <p>{post.author.user_name}</p>
+        <p>{post.author?.user_name}</p>
         <div className="flex gap-2">
           <Typography className="text-grayish" variant="tag" as="span">
-            @tag
           </Typography>
           <span className="text-grayish">●</span>
           <span className="text-grayish">{new Date(post.created_at as Date).toLocaleString()}</span>
