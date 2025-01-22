@@ -1,7 +1,7 @@
 "use client";
 import useOnClickOutside from "@/hooks/useOnClickOutside";
 import cn from "@/utils/cn";
-import React, { ReactNode, useState, type ComponentProps, createContext, Ref } from "react";
+import React, { ReactNode, useState, type ComponentProps, createContext, Ref, RefObject } from "react";
 
 const ModalVisualContext = createContext<[boolean, (isOpen: boolean) => void]>([false, () => { }]);
 
@@ -21,9 +21,11 @@ export function ModalBody({ ...props }: ComponentProps<"div">) {
 export function ModalCloseButton({
   children,
   className,
+  ref
 }: {
   children: ReactNode;
   className?: string;
+  ref: RefObject<HTMLButtonElement>
 }) {
   const [, setIsOpen] = React.useContext(ModalVisualContext);
 
@@ -31,7 +33,7 @@ export function ModalCloseButton({
     setIsOpen(false);
   };
   return (
-    <button onClick={clickHandler} className={cn("w-fit absolute top-4 right-4", className)}>
+    <button ref={ref} onClick={clickHandler} className={cn("w-fit absolute top-4 right-4", className)}>
       {children}
     </button>
   );

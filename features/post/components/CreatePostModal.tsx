@@ -9,7 +9,7 @@ import useToaster from "@/hooks/useToaster";
 import { useUserStore } from "@/store/user";
 import { User, X } from "lucide-react";
 import { redirect } from "next/navigation";
-import { useRef, useState } from "react";
+import { type RefObject, useRef, useState } from "react";
 import { usePostsStore } from "@/store/posts";
 
 const IMAGE_REGEX = /\.(png|jpg|jpeg|gif|svg)$/i;
@@ -32,8 +32,7 @@ export default function CreatePostModal() {
 
     const res = await createPost({ content: postContent, medias: urls! });
     if (res.data.id) {
-      // FIX: post is not appended to the store
-      appendPost(res.data)
+      appendPost(res.data.id)
       closeModalRef.current?.click()
       toast.success("Post created successfully");
     } else {
@@ -79,7 +78,7 @@ export default function CreatePostModal() {
         className="hidden"
         onChange={(e) => setFiles(e.target.files)}
       />
-      <ModalCloseButton ref={closeModalRef}>
+      <ModalCloseButton ref={closeModalRef as RefObject<HTMLButtonElement>}>
         <X size={20} className="mb-[24px] ml-auto cursor-pointer text-[#919191]" />
       </ModalCloseButton>
       <div className="flex items-center justify-between gap-3">

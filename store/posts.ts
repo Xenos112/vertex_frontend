@@ -8,7 +8,7 @@ export type PostsStore = {
   posts: Post[]
   loading: boolean
   error: string
-  appendPost: (post: Post) => void
+  appendPost: (id: string) => Promise<void>
   fetchFeed: () => Promise<Post[] | { message: string }>
 }
 
@@ -17,7 +17,8 @@ export const usePostsStore = create<PostsStore>()((set, _get) => ({
   posts: [],
   loading: false,
   error: "",
-  appendPost: (post: Post) => {
+  appendPost: async (id: string) => {
+    const post = await getPost(id);
     set((state) => ({
       ...state,
       posts: [post, ...state.posts],
