@@ -19,7 +19,7 @@ const PostContext = createContext<Post | null>(null);
 export function Post({ post, children }: { post: Post; children: React.ReactNode }) {
   return (
     <PostContext value={post!}>
-      <div className="p-[25px]">{children}</div>
+      <div className="p-[25px] border-b border-grayish">{children}</div>
     </PostContext>
   );
 }
