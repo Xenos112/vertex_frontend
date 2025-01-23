@@ -75,10 +75,13 @@ function AvatarImage({ ...props }: AvatarImageProps) {
     fetchImage();
   }, [props.src]);
 
+  // FIX: size avatar is not right 
   return !loading ? (
     <img
       className={cn("size-[40px] rounded-full", props.className)}
       src={imageSrc}
+      width={40}
+      height={40}
       alt={props.alt}
     />
   ) : null;
