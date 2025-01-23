@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import daisyui from "daisyui";
 
 export default {
   content: [
@@ -14,8 +15,8 @@ export default {
     extend: {
       container: {
         screens: {
-          lg: "1200px"
-        }
+          lg: "1200px",
+        },
       },
       animation: {
         "fade-in": "fade-in 3s ease-in-out",
@@ -33,17 +34,17 @@ export default {
         },
         appear: {
           "0%": {
-            left: '100%'
+            left: "100%",
           },
           "30%": {
-            left: '0%'
+            left: "0%",
           },
           "80%": {
-            left: "0%"
+            left: "0%",
           },
           "100%": {
-            left: "100%"
-          }
+            left: "100%",
+          },
         },
       },
       backgroundColor: {
@@ -60,5 +61,8 @@ export default {
     },
   },
   darkMode: "class",
-  plugins: [],
+  plugins: [daisyui],
+  daisyui: {
+    themes: ["night"],
+  },
 } satisfies Config;

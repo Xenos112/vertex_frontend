@@ -1,4 +1,3 @@
-import Button from "@/components/ui/Button";
 import Typography from "@/components/ui/Typography";
 
 export default function Hero() {
@@ -9,16 +8,13 @@ export default function Hero() {
           Explore More in Your Domain <br />
           with counter less communities
         </Typography>
-
         <Typography as="h2" variant="sub-title" className="text-center">
           join and communicate with different users from your favorite domain
         </Typography>
       </div>
       <div className="flex items-center justify-center gap-4">
-        <Button className="flex-col">login now</Button>
-        <Button variant="outline" className="flex-col">
-          join communities
-        </Button>
+        <button className="btn btn-primary">login now</button>
+        <button className="btn btn-outline btn-primary flex-col">join communities</button>
       </div>
     </div>
   );

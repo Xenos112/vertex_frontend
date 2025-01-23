@@ -2,7 +2,6 @@
 
 import whoToFollow, { type UserSuggestion } from "@/api/whoToFollow";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
-import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import { useUserStore } from "@/store/user";
 import { Loader2, Search } from "lucide-react";
@@ -68,12 +67,12 @@ function WhoToFollowSection() {
       ) : usersToFollow ? (
         <div className="mt-2 space-y-5">
           {usersToFollow.map((user) => (
-            <div key={user.id} className="flex items-center gap-2 justify-between">
+            <div key={user.id} className="flex items-center justify-between gap-2">
               <Avatar>
-                <AvatarImage src={user.image?.url as (string | null)} alt={user.user_name} />
+                <AvatarImage src={user.image?.url as string | null} alt={user.user_name} />
                 <AvatarFallback>{user.user_name}</AvatarFallback>
               </Avatar>
-              <Button size='sm'>Follow</Button>
+              <button className="btn btn-primary">Follow</button>
             </div>
           ))}
         </div>
@@ -94,7 +93,7 @@ export default function RightNavBar() {
           <p className="mt-1 text-grayish">Enjoy the full power with he Premium subscription</p>
         </div>
         <Link href="/premium">
-          <Button className="mt-4">Subscribe</Button>
+          <button className="btn mt-4 btn-primary">Subscribe</button>
         </Link>
       </div>
 

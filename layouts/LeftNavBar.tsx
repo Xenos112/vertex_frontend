@@ -1,16 +1,16 @@
 "use client";
-import Button from "@/components/ui/Button";
 import cn from "@/utils/cn";
 import { Hash, Worm, Bell, Bookmark, User, Users, Search, Sun, Moon } from "lucide-react";
 import Link, { type LinkProps } from "next/link";
-import { ReactNode, useState } from "react";
+import { ReactNode, useRef, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 import { useUserStore } from "@/store/user";
 import Typography from "@/components/ui/Typography";
 import useOnClickOutside from "@/hooks/useOnClickOutside";
 import { useTheme } from "next-themes";
-import { Modal, ModalBody, ModalContent, ToggleButton } from "@/components/ui/Modal";
 import CreatePostModal from "@/features/post/components/CreatePostModal";
+import { redirect } from "next/navigation";
+import useToaster from "@/hooks/useToaster";
 
 function NavItem({
   href,
@@ -36,6 +36,16 @@ export default function LeftNavBar() {
   const [isMobileSideBarOpen, setIsMobileSideBarOpen] = useState(false);
   const ref = useOnClickOutside(() => setIsMobileSideBarOpen(false));
   const { theme, setTheme } = useTheme();
+  const modalRef = useRef<HTMLDialogElement | null>(null);
+  const toaster = useToaster();
+
+  const openModal = () => {
+    if (!user?.id) {
+      toaster.error("you must be logged in to create a post");
+      redirect("/login");
+    }
+    modalRef.current?.showModal();
+  };
 
   return (
     <>
@@ -90,14 +100,20 @@ export default function LeftNavBar() {
                 <span className="max-lg:hidden max-sm:block">Profile</span>
               </NavItem>
             )}
-            <Modal>
-              <ToggleButton>
-                <Button className="w-full rounded-full">Post</Button>
-              </ToggleButton>
-              <ModalContent>
+            <button onClick={openModal} className="btn btn-primary w-full rounded-full">
+              Post
+            </button>
+            <dialog ref={modalRef} className="modal">
+              <div className="modal-box">
+                <form method="dialog">
+                  {/* if there is a button in form, it will close the modal */}
+                  <button className="btn btn-circle btn-ghost btn-sm absolute right-2 top-2">
+                    ✕
+                  </button>
+                </form>
                 <CreatePostModal />
-              </ModalContent>
-            </Modal>
+              </div>
+            </dialog>
           </div>
         </div>
 
@@ -137,9 +153,8 @@ export default function LeftNavBar() {
       </div>
 
       <div className="flex w-full items-center justify-between border-b border-b-grayish p-4 sm:hidden">
-        <Button
-          variant={"outline"}
-          className="size-[40px] border-none p-0 text-white"
+        <button
+          className="btn btn-outline btn-primary size-[40px] border-none p-0 text-white"
           onClick={() => setIsMobileSideBarOpen(!isMobileSideBarOpen)}
         >
           {user ? (
@@ -152,7 +167,7 @@ export default function LeftNavBar() {
               <User className="size-[32]" />
             </Link>
           )}
-        </Button>
+        </button>
         <Worm className="size-[32]" />
       </div>
     </>

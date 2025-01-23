@@ -1,8 +1,8 @@
-'use client';
+"use client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 import { type Post } from "@/types";
-import { useState, createContext, use } from "react";
-import { BookMarked, Heart, MessageCircle, Share2 } from "lucide-react";
+import { useState, createContext, use, useRef, useEffect } from "react";
+import { BookMarked, EllipsisVertical, Heart, MessageCircle, Share2, X } from "lucide-react";
 import likePost from "@/features/post/api/like-post";
 import dislikePost from "@/features/post/api/dislike-post";
 import savePost from "@/features/post/api/save-post";
@@ -21,7 +21,7 @@ const PostContext = createContext<Post | null>(null);
 export function Post({ post, children }: { post: Post; children: React.ReactNode }) {
   return (
     <PostContext value={post!}>
-      <div className="p-[25px] border-b border-grayish">{children}</div>
+      <div className="border-b border-grayish p-[25px]">{children}</div>
     </PostContext>
   );
 }
@@ -167,20 +167,26 @@ export function Author() {
   const post = use(PostContext) as Post;
 
   return (
-    <div className="flex items-center gap-3">
-      <Avatar>
-        <AvatarImage src={post.author?.avatar?.url} />
-        <AvatarFallback>{post.author?.user_name}</AvatarFallback>
-      </Avatar>
-      <div>
-        <p>{post.author?.user_name}</p>
-        <div className="flex gap-2">
-          <Typography className="text-grayish" variant="tag" as="span">
-          </Typography>
-          <span className="text-grayish">●</span>
-          <span className="text-grayish">{new Date(post.created_at as Date).toLocaleString()}</span>
+    <div className="flex items-center justify-between">
+      <div className="flex items-center gap-3">
+        <Avatar>
+          <AvatarImage src={post.author?.avatar?.url} />
+          <AvatarFallback>{post.author?.user_name}</AvatarFallback>
+        </Avatar>
+        <div>
+          <p>{post.author?.user_name}</p>
+          <div className="flex gap-2">
+            <Typography className="text-grayish" variant="tag" as="span">
+              @tag
+            </Typography>
+            <span className="text-grayish">●</span>
+            <span className="text-grayish">{formatDate(post.created_at as Date)}</span>
+          </div>
         </div>
       </div>
+
+      {/* Move PostActions to the far right */}
+      <PostActions />
     </div>
   );
 }
@@ -208,13 +214,14 @@ export function Share() {
 
 export function PostNotFound() {
   return (
-    <div className="flex flex-col items-center justify-center gap-4 p-6 h-full">
+    <div className="flex h-full flex-col items-center justify-center gap-4 p-6">
       <h1 className="text-3xl font-bold">404</h1>
-      <p className='font-medium'>Post not found or No Longer Available</p>
-      <Link className='underline' href="/">Go to home</Link>
+      <p className="font-medium">Post not found or No Longer Available</p>
+      <Link className="underline" href="/">
+        Go to home
+      </Link>
     </div>
   );
-
 }
 // TODO: fetch the tag from the backend and display it
 

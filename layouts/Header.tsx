@@ -1,13 +1,12 @@
 "use client";
-import Button from "@/components/ui/Button";
 import Typography from "@/components/ui/Typography";
 import { useState } from "react";
-import {  Menu, UserRound, X } from "lucide-react";
+import { Menu, UserRound, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useUserStore } from "@/store/user";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 import ThemeToggle from "@/components/shared/ThemeToggle";
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -21,7 +20,7 @@ export default function Header() {
 
   return (
     <div className="z-[1000] flex h-[80px] items-center justify-between">
-      <Typography as="h1" variant="logo" className="cursor-pointer">
+      <Typography as="a" href='/' variant="logo" className="cursor-pointer">
         Logo
       </Typography>
       <div
@@ -47,9 +46,9 @@ export default function Header() {
             <X size={30} />
           </button>
         </ul>
-        <Button className="max-md:hidden">
-          <Link href='/login'>Login</Link>
-        </Button>
+        <button className="btn btn-primary max-md:hidden">
+          <Link href="/login">Login</Link>
+        </button>
       </div>
       <div className="flex gap-4 md:hidden">
         <button onClick={() => setOpen(true)}>
@@ -61,11 +60,11 @@ export default function Header() {
             <AvatarFallback>{user?.user_name}</AvatarFallback>
           </Avatar>
         ) : (
-          <Button variant="outline" size="icon-sm">
+          <button className="btn btn-circle btn-primary btn-sm">
             <Link href="/login">
               <UserRound />
             </Link>
-          </Button>
+          </button>
         )}
       </div>
     </div>
