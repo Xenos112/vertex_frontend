@@ -13,6 +13,8 @@ import { useUserStore } from "@/store/user";
 import { redirect } from "next/navigation";
 import Typography from "../ui/Typography";
 import Link from "next/link";
+import deletePost from "@/api/posts/delete-post";
+import formatDate from "@/utils/formate-date";
 
 const PostContext = createContext<Post | null>(null);
 
@@ -215,3 +217,83 @@ export function PostNotFound() {
 
 }
 // TODO: fetch the tag from the backend and display it
+
+export function PostActions() {
+  const post = use(PostContext) as Post;
+  const user = useUserStore((state) => state.user);
+  const toaster = useToaster();
+  const modalRef = useRef<HTMLDialogElement | null>(null);
+  const detailsRef = useRef<HTMLDetailsElement>(null);
+
+  const deletePostHandler = async () => {
+    if (user?.id !== post.author.id) {
+      toaster.error("you can't delete this post ");
+    }
+    const result = await deletePost(post.id);
+    if (typeof result === "string") toaster.error(result);
+
+    toaster.success("Post deleted successfully");
+  };
+
+  const openModal = () => {
+    modalRef.current?.showModal();
+  };
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (detailsRef.current && !detailsRef.current.contains(event.target as Node)) {
+        detailsRef.current.removeAttribute("open");
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  async function copyUrl() {
+    const res = await copyPostUrl(post.id);
+    if (res) {
+      toaster.success("Copied to clipboard");
+      return;
+    }
+
+    toaster.error("Failed to copy to clipboard");
+  }
+
+  // TODO: Complete the logic for the post update
+  return (
+    <details ref={detailsRef} className="dropdown">
+      <summary className="btn bg-transparent p-0">
+        <EllipsisVertical />
+      </summary>
+      <ul className="menu dropdown-content z-[1] w-52 rounded-box bg-base-100 p-2 shadow">
+        {user?.id === post.author.id && (
+          <li>
+            <button onClick={deletePostHandler}>Delete Post</button>
+          </li>
+        )}
+        {user?.id === post.author.id && (
+          <li>
+            <button onClick={openModal}>Edit Post</button>
+            <dialog ref={modalRef} className="modal">
+              <div className="modal-box fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-base-100 duration-0">
+                <h3 className="text-lg font-bold">Hello!</h3>
+                <p className="py-4">Press ESC key or click the button below to close</p>
+                <div className="modal-action">
+                  <form method="dialog">
+                    <button className="btn">Close</button>
+                  </form>
+                </div>
+              </div>
+            </dialog>
+          </li>
+        )}
+        <li>
+          <button onClick={copyUrl}>Share Post</button>
+        </li>
+      </ul>
+    </details>
+  );
+}
