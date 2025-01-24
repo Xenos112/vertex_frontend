@@ -1,4 +1,3 @@
-import Button from "@/components/ui/Button";
 import {
   Pricing,
   PricingBody,
@@ -76,24 +75,18 @@ export default function PremiumPage() {
         <Pricing className="scale-95" data={freeTier}>
           <PricingHeader />
           <PricingBody />
-          <Button size="lg" className="mt-auto">
-            Subscribe
-          </Button>
+          <button className="btn btn-primary btn-lg mt-auto">Subscribe</button>
         </Pricing>
         <Pricing className="scale-110" data={proTier}>
           <PricingHeader />
           <PricingBody />
-          <Button size="lg" className="mt-auto">
-            Subscribe
-          </Button>
+          <button className="btn btn-primary btn-lg mt-auto">Subscribe</button>
         </Pricing>
         <Pricing className="scale-95" data={maxTier}>
           <PricingHeader />
           <PricingBody />
           <PricingChip>Best Deal</PricingChip>
-          <Button size="lg" className="mt-auto">
-            Subscribe
-          </Button>
+          <button className="btn btn-primary btn-lg mt-auto">Subscribe</button>
         </Pricing>
       </div>
     </main>

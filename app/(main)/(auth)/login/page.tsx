@@ -1,6 +1,5 @@
 "use client";
 import { login } from "@/api/auth/login";
-import Input from "@/components/ui/Input";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { type FormEvent, useState } from "react";
