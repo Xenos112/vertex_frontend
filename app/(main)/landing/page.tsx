@@ -1,3 +1,4 @@
+
 import Hero from "./_components/Hero";
 import Stats from "./_components/Stats";
 
@@ -8,4 +9,17 @@ export default function page() {
       <Stats />
     </div>
   )
+}
+const landing = ()=>{
+  return(
+  
+    <>
+    <title>Our Social media App, Connect and Share</title>
+    
+    </>
+    
+    
+    
+  )
+
 }

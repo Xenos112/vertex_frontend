@@ -48,8 +48,7 @@ export default function page() {
     <div className="flex h-[calc(100dvh-80px)] items-center justify-center">
       <div className="flex w-full max-w-[800px] flex-col items-center justify-center gap-[90px]">
         <h1 className="max-w-[500px] text-center text-[28px] font-semibold max-md:mx-[50px] max-md:text-[20px]">
-          Register in a New Account and Share Knowledge
-        </h1>
+        Sign up to easily share posts and stories with your followers.        </h1>
 
         <div className="flex w-full items-center justify-between max-md:flex-col max-md:gap-[30px]">
           <form onSubmit={run} className="flex flex-col gap-[30px]">
